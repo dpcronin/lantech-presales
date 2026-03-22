@@ -4,23 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lantech Pre-Sales Labour Calculator</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0f1a;
-    --surface: #111827;
-    --surface2: #1a2235;
-    --border: #1e2d45;
-    --accent: #00d4ff;
-    --accent2: #7c3aed;
-    --accent3: #10b981;
-    --warn: #f59e0b;
-    --text: #e2e8f0;
-    --text-muted: #64748b;
-    --text-dim: #94a3b8;
-    --user-bubble: #1e3a5f;
-    --bot-bubble: #111827;
-    --radius: 12px;
+    --brand: #0075BF;
+    --brand-dark: #005a94;
+    --brand-light: #e8f4fc;
+    --brand-mid: #cce6f7;
+    --bg: #f4f7fb;
+    --surface: #ffffff;
+    --surface2: #f0f5fa;
+    --border: #dde6ef;
+    --border-strong: #c2d4e3;
+    --text: #1a2b3c;
+    --text-muted: #6b7f92;
+    --text-dim: #8fa3b5;
+    --accent-green: #00a86b;
+    --accent-orange: #f07c00;
+    --user-bg: #0075BF;
+    --radius: 10px;
+    --shadow: 0 2px 12px rgba(0,117,191,0.08);
+    --shadow-lg: 0 8px 32px rgba(0,117,191,0.12);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,99 +32,115 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'DM Mono', monospace;
+    font-family: 'Barlow', sans-serif;
     height: 100vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
   }
 
-  /* Header */
+  /* ── Header ── */
   header {
     background: var(--surface);
     border-bottom: 1px solid var(--border);
-    padding: 14px 24px;
+    padding: 0 28px;
     display: flex;
     align-items: center;
-    gap: 14px;
+    height: 60px;
     flex-shrink: 0;
+    box-shadow: 0 1px 8px rgba(0,117,191,0.06);
     position: relative;
   }
   header::after {
     content: '';
     position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+    bottom: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--brand);
   }
-  .logo-icon {
-    width: 38px; height: 38px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 14px;
   }
-  .header-text h1 {
-    font-family: 'Syne', sans-serif;
+  .logo-mark img {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+
+  .header-divider {
+    width: 1px;
+    height: 28px;
+    background: var(--border);
+    margin: 0 20px;
+  }
+
+  .header-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
     font-size: 16px;
-    font-weight: 800;
+    color: var(--brand);
     letter-spacing: 0.5px;
-    color: var(--text);
-  }
-  .header-text p {
-    font-size: 10px;
-    color: var(--text-muted);
-    letter-spacing: 1px;
     text-transform: uppercase;
-    margin-top: 1px;
   }
-  .header-status {
+
+  .header-badge {
     margin-left: auto;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
+    background: var(--brand-light);
+    border: 1px solid var(--brand-mid);
+    border-radius: 20px;
+    padding: 5px 12px;
     font-size: 11px;
-    color: var(--accent3);
-    letter-spacing: 0.5px;
+    font-weight: 600;
+    color: var(--brand);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
   }
   .status-dot {
     width: 7px; height: 7px;
     border-radius: 50%;
-    background: var(--accent3);
-    animation: pulse 2s infinite;
+    background: var(--accent-green);
+    animation: pulse 2.5s infinite;
   }
   @keyframes pulse {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+    50% { opacity: 0.3; }
   }
 
-  /* Main layout */
+  /* ── Layout ── */
   .main {
     display: flex;
     flex: 1;
     overflow: hidden;
   }
 
-  /* Sidebar */
+  /* ── Sidebar ── */
   .sidebar {
-    width: 220px;
+    width: 230px;
     background: var(--surface);
     border-right: 1px solid var(--border);
     padding: 20px 14px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
+    overflow-y: auto;
   }
   .sidebar-label {
-    font-size: 9px;
-    letter-spacing: 2px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--text-muted);
+    font-weight: 600;
     margin-bottom: 8px;
-    padding-left: 4px;
+    padding-left: 8px;
   }
+
   .project-btn {
     background: transparent;
     border: 1px solid transparent;
@@ -128,176 +148,204 @@
     padding: 9px 12px;
     cursor: pointer;
     text-align: left;
-    color: var(--text-dim);
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
+    color: var(--text-muted);
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
     transition: all 0.15s;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
+    width: 100%;
   }
   .project-btn:hover {
-    background: var(--surface2);
-    color: var(--text);
-    border-color: var(--border);
+    background: var(--brand-light);
+    color: var(--brand);
+    border-color: var(--brand-mid);
   }
   .project-btn.active {
-    background: rgba(0,212,255,0.08);
-    border-color: rgba(0,212,255,0.3);
-    color: var(--accent);
-  }
-  .project-btn .p-icon { font-size: 14px; }
-  .project-btn .p-name { flex: 1; }
-  .project-btn .p-badge {
-    background: var(--accent2);
+    background: var(--brand);
     color: white;
-    font-size: 8px;
-    padding: 1px 5px;
-    border-radius: 10px;
-    display: none;
+    border-color: var(--brand);
+    box-shadow: 0 2px 8px rgba(0,117,191,0.25);
   }
-  .project-btn.done .p-badge { display: block; }
+  .project-btn .p-icon { font-size: 15px; flex-shrink: 0; }
+  .project-btn .p-name { flex: 1; }
+  .project-btn .p-check {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--accent-green);
+    color: white;
+    font-size: 10px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .project-btn.done .p-check { display: flex; }
+  .project-btn.active .p-check { background: rgba(255,255,255,0.3); }
 
   .sidebar-divider {
     height: 1px;
     background: var(--border);
-    margin: 10px 0;
+    margin: 12px 0;
   }
 
   .summary-box {
-    background: var(--surface2);
-    border: 1px solid var(--border);
+    background: var(--brand);
     border-radius: 10px;
-    padding: 12px;
+    padding: 14px;
     margin-top: auto;
+    color: white;
   }
   .summary-box h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
     font-weight: 700;
-    color: var(--text-muted);
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
+    opacity: 0.7;
     margin-bottom: 10px;
   }
   .summary-row {
     display: flex;
     justify-content: space-between;
-    font-size: 10px;
-    color: var(--text-dim);
+    font-size: 11px;
     margin-bottom: 4px;
+    opacity: 0.85;
   }
   .summary-row.total {
-    border-top: 1px solid var(--border);
+    border-top: 1px solid rgba(255,255,255,0.2);
     padding-top: 8px;
     margin-top: 6px;
-    color: var(--accent);
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 700;
+    opacity: 1;
   }
-  .summary-val { color: var(--text); }
+  .summary-val { font-weight: 600; }
 
-  /* Chat area */
+  /* ── Chat area ── */
   .chat-area {
     flex: 1;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    background: var(--bg);
   }
 
   .messages {
     flex: 1;
     overflow-y: auto;
-    padding: 28px 28px 16px;
+    padding: 28px 32px 16px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
     scroll-behavior: smooth;
   }
   .messages::-webkit-scrollbar { width: 4px; }
   .messages::-webkit-scrollbar-track { background: transparent; }
-  .messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .messages::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
 
   .msg {
     display: flex;
-    gap: 12px;
-    animation: fadeUp 0.3s ease;
-    max-width: 780px;
+    gap: 11px;
+    animation: fadeUp 0.25s ease;
+    max-width: 800px;
   }
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
   .msg.user { flex-direction: row-reverse; align-self: flex-end; }
   .msg.bot { align-self: flex-start; }
 
   .avatar {
-    width: 32px; height: 32px;
+    width: 34px; height: 34px;
     border-radius: 8px;
     flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 700;
   }
-  .avatar.bot-av { background: linear-gradient(135deg, #00d4ff22, #7c3aed22); border: 1px solid var(--border); }
-  .avatar.user-av { background: var(--user-bubble); border: 1px solid #1e3a5f; }
+  .avatar.bot-av {
+    background: var(--brand);
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+  .avatar.user-av {
+    background: var(--brand-light);
+    border: 1px solid var(--brand-mid);
+    color: var(--brand);
+  }
 
   .bubble {
     padding: 12px 16px;
     border-radius: var(--radius);
-    font-size: 13px;
-    line-height: 1.65;
+    font-size: 14px;
+    line-height: 1.6;
     max-width: 620px;
   }
   .msg.bot .bubble {
-    background: var(--bot-bubble);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 4px var(--radius) var(--radius) var(--radius);
     color: var(--text);
+    box-shadow: var(--shadow);
   }
   .msg.user .bubble {
-    background: var(--user-bubble);
-    border: 1px solid #1e3a5f;
+    background: var(--brand);
+    border: 1px solid var(--brand-dark);
     border-radius: var(--radius) 4px var(--radius) var(--radius);
-    color: var(--text);
+    color: white;
   }
 
-  .bubble strong { color: var(--accent); font-weight: 500; }
+  .bubble strong { color: var(--brand); font-weight: 600; }
+  .msg.user .bubble strong { color: rgba(255,255,255,0.9); }
+
   .bubble .tag {
     display: inline-block;
-    background: rgba(124,58,237,0.15);
-    border: 1px solid rgba(124,58,237,0.3);
-    color: #a78bfa;
-    font-size: 10px;
-    padding: 2px 8px;
+    background: var(--brand-light);
+    border: 1px solid var(--brand-mid);
+    color: var(--brand);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
     border-radius: 4px;
-    margin: 2px;
-    letter-spacing: 0.5px;
+    margin: 2px 2px;
+    letter-spacing: 0.3px;
   }
-  .bubble .result-card {
+
+  .result-card {
     background: var(--surface2);
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 14px;
-    margin-top: 10px;
+    margin-top: 12px;
+    border-left: 3px solid var(--brand);
   }
-  .result-card .rc-row {
+  .rc-row {
     display: flex;
     justify-content: space-between;
-    font-size: 11px;
+    font-size: 12px;
     margin-bottom: 5px;
-    color: var(--text-dim);
+    color: var(--text-muted);
+    gap: 16px;
   }
-  .result-card .rc-row.big {
-    font-size: 14px;
+  .rc-row .rc-label { flex: 1; }
+  .rc-row .rc-val { color: var(--text); font-weight: 600; white-space: nowrap; }
+  .rc-row.big {
+    font-size: 15px;
     color: var(--text);
+    font-weight: 700;
     border-top: 1px solid var(--border);
-    padding-top: 8px;
-    margin-top: 6px;
+    padding-top: 10px;
+    margin-top: 8px;
   }
-  .result-card .rc-val { color: var(--accent3); }
-  .result-card .rc-row.big .rc-val { color: var(--accent); font-weight: 500; }
+  .rc-row.big .rc-val { color: var(--brand); font-size: 16px; }
 
-  /* Options / quick replies */
+  /* Quick replies */
   .quick-replies {
     display: flex;
     flex-wrap: wrap;
@@ -305,77 +353,87 @@
     margin-top: 12px;
   }
   .qr-btn {
-    background: var(--surface2);
-    border: 1px solid var(--border);
+    background: var(--surface);
+    border: 1.5px solid var(--brand-mid);
     border-radius: 6px;
-    padding: 7px 14px;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--text-dim);
+    padding: 7px 16px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--brand);
     cursor: pointer;
     transition: all 0.15s;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.2px;
   }
   .qr-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(0,212,255,0.05);
+    background: var(--brand);
+    border-color: var(--brand);
+    color: white;
+    box-shadow: 0 2px 8px rgba(0,117,191,0.2);
   }
 
   /* Input area */
   .input-area {
-    padding: 16px 28px 20px;
+    padding: 14px 32px 18px;
     border-top: 1px solid var(--border);
     background: var(--surface);
     display: flex;
     gap: 10px;
-    align-items: flex-end;
+    align-items: center;
     flex-shrink: 0;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
   }
   .input-wrap {
     flex: 1;
     background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
     display: flex;
     align-items: center;
     padding: 10px 14px;
     gap: 8px;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
-  .input-wrap:focus-within { border-color: rgba(0,212,255,0.4); }
+  .input-wrap:focus-within {
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px rgba(0,117,191,0.08);
+  }
   #userInput {
     flex: 1;
     background: transparent;
     border: none;
     outline: none;
     color: var(--text);
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    resize: none;
-    height: 22px;
-    line-height: 22px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
   }
-  #userInput::placeholder { color: var(--text-muted); }
+  #userInput::placeholder { color: var(--text-dim); }
+
   .send-btn {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    background: var(--brand);
     border: none;
     border-radius: 8px;
-    width: 40px; height: 40px;
+    width: 42px; height: 42px;
     display: flex; align-items: center; justify-content: center;
     cursor: pointer;
     flex-shrink: 0;
-    transition: opacity 0.15s;
-    font-size: 16px;
+    transition: background 0.15s, box-shadow 0.15s;
+    color: white;
+    font-size: 17px;
+    box-shadow: 0 2px 8px rgba(0,117,191,0.25);
   }
-  .send-btn:hover { opacity: 0.85; }
+  .send-btn:hover {
+    background: var(--brand-dark);
+    box-shadow: 0 4px 12px rgba(0,117,191,0.35);
+  }
 
+  /* Typing indicator */
   .typing-indicator {
     display: flex; gap: 4px; align-items: center; padding: 4px 0;
   }
   .typing-indicator span {
-    width: 6px; height: 6px;
-    background: var(--text-muted);
+    width: 7px; height: 7px;
+    background: var(--brand-mid);
     border-radius: 50%;
     animation: typing 1.2s infinite;
   }
@@ -385,59 +443,75 @@
     0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
     30% { transform: translateY(-5px); opacity: 1; }
   }
+
+  /* Progress bar */
+  .progress-bar-wrap {
+    background: var(--border);
+    border-radius: 4px;
+    height: 4px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    background: var(--brand);
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo-icon">⚡</div>
-  <div class="header-text">
-    <h1>Lantech Pre-Sales Agent</h1>
-    <p>Labour Estimation · Project Scoping</p>
+  <div class="logo-area">
+    <div class="logo-mark"><img src="data:image/jpeg;base64,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" alt="Lantech" style="height:42px;width:auto;display:block;"></div>
   </div>
-  <div class="header-status">
+  <div class="header-divider"></div>
+  <div class="header-title">Pre-Sales Labour Calculator</div>
+  <div class="header-badge">
     <div class="status-dot"></div>
-    ONLINE
+    Ready
   </div>
 </header>
 
 <div class="main">
   <div class="sidebar">
     <div class="sidebar-label">Project Types</div>
+
     <button class="project-btn" id="btn-cloud" onclick="startProject('cloud')">
       <span class="p-icon">☁️</span>
       <span class="p-name">Cloud Migration</span>
-      <span class="p-badge">✓</span>
+      <span class="p-check">✓</span>
     </button>
     <button class="project-btn" id="btn-server" onclick="startProject('server')">
       <span class="p-icon">🖥️</span>
       <span class="p-name">Server Upgrade</span>
-      <span class="p-badge">✓</span>
+      <span class="p-check">✓</span>
     </button>
     <button class="project-btn" id="btn-network" onclick="startProject('network')">
       <span class="p-icon">🌐</span>
       <span class="p-name">Network Upgrade</span>
-      <span class="p-badge">✓</span>
+      <span class="p-check">✓</span>
     </button>
     <button class="project-btn" id="btn-smtp" onclick="startProject('smtp')">
       <span class="p-icon">📧</span>
       <span class="p-name">SMTP Secure Send</span>
-      <span class="p-badge">✓</span>
+      <span class="p-check">✓</span>
     </button>
     <button class="project-btn" id="btn-mdm" onclick="startProject('mdm')">
       <span class="p-icon">📱</span>
       <span class="p-name">MDM / MAM</span>
-      <span class="p-badge">✓</span>
+      <span class="p-check">✓</span>
     </button>
     <button class="project-btn" id="btn-avd" onclick="startProject('avd')">
       <span class="p-icon">🖱️</span>
       <span class="p-name">AVD</span>
-      <span class="p-badge">✓</span>
+      <span class="p-check">✓</span>
     </button>
     <button class="project-btn" id="btn-recycle" onclick="startProject('recycle')">
       <span class="p-icon">♻️</span>
       <span class="p-name">Recycling</span>
-      <span class="p-badge">✓</span>
+      <span class="p-check">✓</span>
     </button>
 
     <div class="sidebar-divider"></div>
@@ -446,7 +520,7 @@
       <h3>Session Summary</h3>
       <div id="summaryRows"></div>
       <div class="summary-row total">
-        <span>TOTAL</span>
+        <span>Total</span>
         <span class="summary-val" id="summaryTotal">0 hrs / €0</span>
       </div>
     </div>
@@ -456,7 +530,7 @@
     <div class="messages" id="messages"></div>
     <div class="input-area">
       <div class="input-wrap">
-        <input type="text" id="userInput" placeholder="Type a number, yes/no, or select an option above…" autocomplete="off"/>
+        <input type="text" id="userInput" placeholder="Type a number, yes / no, or select an option…" autocomplete="off"/>
       </div>
       <button class="send-btn" onclick="handleUserInput()">➤</button>
     </div>
@@ -466,21 +540,12 @@
 <script>
 const RATE = 150;
 
-// ─── State ────────────────────────────────────────────────────────────────────
-let state = {
-  project: null,
-  step: 0,
-  answers: {},
-  sessionResults: {}
-};
+let state = { project: null, step: 0, answers: {}, sessionResults: {} };
 
-// ─── Project Definitions ─────────────────────────────────────────────────────
-
+// ── Projects ────────────────────────────────────────────────────────────────
 const PROJECTS = {
-
   cloud: {
-    name: 'Cloud Migration',
-    icon: '☁️',
+    name: 'Cloud Migration', icon: '☁️',
     steps: [
       { key: 'data_gb',     q: 'How many <strong>GB of data</strong> need to be migrated to SharePoint / OneDrive?', type: 'number', hint: 'e.g. 500' },
       { key: 'workstations',q: 'How many <strong>workstations</strong> need to be migrated to Azure AD?', type: 'number', hint: 'e.g. 20' },
@@ -490,115 +555,109 @@ const PROJECTS = {
       { key: 'mailboxes',   q: 'How many <strong>mailboxes</strong> need to be migrated to Microsoft 365?', type: 'number', hint: 'e.g. 50' },
       { key: 'saas_backup', q: 'Is <strong>SaaS Backup</strong> setup required?', type: 'yesno' },
       { key: 'dhcp_dns',    q: 'Is <strong>DHCP and DNS setup on Firewall</strong> required?', type: 'yesno' },
-      { key: 'disable_aad_connect', q: 'Does <strong>Azure AD Connect</strong> need to be disabled?', type: 'yesno' },
+      { key: 'disable_aad', q: 'Does <strong>Azure AD Connect</strong> need to be disabled?', type: 'yesno' },
       { key: 'jumpbox',     q: 'Is a <strong>Jumpbox</strong> required (Build & Install)?', type: 'yesno' },
       { key: 'pm_fee',      q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
     ],
     calc: (a) => {
-      let hrs = 0;
-      hrs += (parseFloat(a.data_gb) || 0) * 0.01;
-      hrs += (parseFloat(a.workstations) || 0) * 0.35;
-      if (a.intune === 'yes') hrs += 3.75;
-      hrs += (parseFloat(a.teams) || 0) * 0.25;
-      hrs += (parseFloat(a.new_users) || 0) * 0.2;
-      hrs += (parseFloat(a.mailboxes) || 0) * 0.35;
-      if (a.saas_backup === 'yes') hrs += 1;
-      if (a.dhcp_dns === 'yes') hrs += 1.5;
-      if (a.disable_aad_connect === 'yes') hrs += 0.5;
-      if (a.jumpbox === 'yes') hrs += 1;
-      hrs += 1; // documentation
-      let cost = hrs * RATE;
-      if (a.pm_fee === 'yes') cost = cost * 1.20;
-      return { hrs: round(hrs), cost: round(cost), pm: a.pm_fee === 'yes' };
+      let h = 0;
+      h += (parseFloat(a.data_gb)||0) * 0.01;
+      h += (parseFloat(a.workstations)||0) * 0.35;
+      if (a.intune==='yes') h += 3.75;
+      h += (parseFloat(a.teams)||0) * 0.25;
+      h += (parseFloat(a.new_users)||0) * 0.2;
+      h += (parseFloat(a.mailboxes)||0) * 0.35;
+      if (a.saas_backup==='yes') h += 1;
+      if (a.dhcp_dns==='yes') h += 1.5;
+      if (a.disable_aad==='yes') h += 0.5;
+      if (a.jumpbox==='yes') h += 1;
+      h += 1;
+      let c = h * RATE; if (a.pm_fee==='yes') c *= 1.2;
+      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes' };
     },
     breakdown: (a) => {
-      let rows = [];
-      if ((parseFloat(a.data_gb)||0) > 0) rows.push([`Data Migration (${a.data_gb} GB)`, round((parseFloat(a.data_gb)||0)*0.01)]);
-      if ((parseFloat(a.workstations)||0) > 0) rows.push([`Workstation Azure AD Migration (${a.workstations})`, round((parseFloat(a.workstations)||0)*0.35)]);
-      if (a.intune==='yes') rows.push(['Intune Baseline Policy Config', 3.75]);
-      if ((parseFloat(a.teams)||0)>0) rows.push([`Teams / Channels (${a.teams})`, round((parseFloat(a.teams)||0)*0.25)]);
-      if ((parseFloat(a.new_users)||0)>0) rows.push([`New User Accounts (${a.new_users})`, round((parseFloat(a.new_users)||0)*0.2)]);
-      if ((parseFloat(a.mailboxes)||0)>0) rows.push([`Mailbox Migration (${a.mailboxes})`, round((parseFloat(a.mailboxes)||0)*0.35)]);
-      if (a.saas_backup==='yes') rows.push(['SaaS Backup Setup', 1]);
-      if (a.dhcp_dns==='yes') rows.push(['DHCP & DNS on Firewall', 1.5]);
-      if (a.disable_aad_connect==='yes') rows.push(['Disable Azure AD Connect', 0.5]);
-      if (a.jumpbox==='yes') rows.push(['Build & Install Jumpbox', 1]);
-      rows.push(['Documentation', 1]);
-      return rows;
+      let r = [];
+      if ((parseFloat(a.data_gb)||0)>0) r.push([`Data Migration (${a.data_gb} GB)`, round((parseFloat(a.data_gb)||0)*0.01)]);
+      if ((parseFloat(a.workstations)||0)>0) r.push([`Workstation Azure AD Migration (×${a.workstations})`, round((parseFloat(a.workstations)||0)*0.35)]);
+      if (a.intune==='yes') r.push(['Intune Baseline Policy Config', 3.75]);
+      if ((parseFloat(a.teams)||0)>0) r.push([`Teams / Channels (×${a.teams})`, round((parseFloat(a.teams)||0)*0.25)]);
+      if ((parseFloat(a.new_users)||0)>0) r.push([`New User Accounts (×${a.new_users})`, round((parseFloat(a.new_users)||0)*0.2)]);
+      if ((parseFloat(a.mailboxes)||0)>0) r.push([`Mailbox Migration (×${a.mailboxes})`, round((parseFloat(a.mailboxes)||0)*0.35)]);
+      if (a.saas_backup==='yes') r.push(['SaaS Backup Setup', 1]);
+      if (a.dhcp_dns==='yes') r.push(['DHCP & DNS on Firewall', 1.5]);
+      if (a.disable_aad==='yes') r.push(['Disable Azure AD Connect', 0.5]);
+      if (a.jumpbox==='yes') r.push(['Build & Install Jumpbox', 1]);
+      r.push(['Documentation', 1]);
+      return r;
     }
   },
-
   server: {
-    name: 'Server Upgrade',
-    icon: '🖥️',
+    name: 'Server Upgrade', icon: '🖥️',
     steps: [
       { key: 'physical_install', q: 'How many <strong>physical servers</strong> need to be installed?', type: 'number', hint: 'e.g. 1' },
-      { key: 'raid_os',         q: 'How many servers need <strong>RAID / OS / IP setup</strong>?', type: 'number', hint: 'e.g. 1' },
-      { key: 'hyperv',          q: 'How many servers need <strong>Hyper-V setup</strong> (vNICs, vSwitches)?', type: 'number', hint: 'e.g. 0' },
-      { key: 'dc_promo',        q: 'How many <strong>Domain Controller promotions</strong> are needed?', type: 'number', hint: 'e.g. 0' },
-      { key: 'dc_demotion',     q: 'How many <strong>Domain Controller demotions</strong> are needed?', type: 'number', hint: 'e.g. 0' },
-      { key: 'vms',             q: 'How many <strong>Virtual Machines</strong> need to be built?', type: 'number', hint: 'e.g. 0' },
-      { key: 'extra_cpu',       q: 'Is an <strong>Extra Processor</strong> being installed?', type: 'yesno' },
-      { key: 'extra_ram',       q: 'Is <strong>Extra RAM or a Cooling Fan</strong> being installed?', type: 'yesno' },
-      { key: 'ilo',             q: 'Is <strong>ILO setup</strong> required?', type: 'yesno' },
-      { key: 'fsmo',            q: 'Does <strong>FSMO</strong> need to be moved?', type: 'yesno' },
-      { key: 'psu2',            q: 'Is a <strong>2nd Power Supply</strong> being added?', type: 'yesno' },
-      { key: 'dhcp_dns_roles',  q: 'Do <strong>DHCP / DNS Roles</strong> need to be moved?', type: 'yesno' },
-      { key: 'data_migration_gb', q: 'How many <strong>GB of data</strong> need to be migrated server-to-server?', type: 'number', hint: 'e.g. 0' },
-      { key: 'cals',            q: 'Are <strong>CALs</strong> required?', type: 'yesno' },
-      { key: 'backups',         q: 'Does <strong>Backup</strong> configuration need to be added?', type: 'yesno' },
-      { key: 'third_party',     q: 'Is <strong>3rd Party vendor</strong> involvement required?', type: 'yesno' },
-      { key: 'pm_fee',          q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
+      { key: 'raid_os',          q: 'How many servers need <strong>RAID / OS / IP setup</strong>?', type: 'number', hint: 'e.g. 1' },
+      { key: 'hyperv',           q: 'How many servers need <strong>Hyper-V setup</strong> (vNICs, vSwitches)?', type: 'number', hint: 'e.g. 0' },
+      { key: 'dc_promo',         q: 'How many <strong>Domain Controller promotions</strong> are needed?', type: 'number', hint: 'e.g. 0' },
+      { key: 'dc_demotion',      q: 'How many <strong>Domain Controller demotions</strong> are needed?', type: 'number', hint: 'e.g. 0' },
+      { key: 'vms',              q: 'How many <strong>Virtual Machines</strong> need to be built?', type: 'number', hint: 'e.g. 0' },
+      { key: 'extra_cpu',        q: 'Is an <strong>Extra Processor</strong> being installed?', type: 'yesno' },
+      { key: 'extra_ram',        q: 'Is <strong>Extra RAM or a Cooling Fan</strong> being installed?', type: 'yesno' },
+      { key: 'ilo',              q: 'Is <strong>ILO setup</strong> required?', type: 'yesno' },
+      { key: 'fsmo',             q: 'Does <strong>FSMO</strong> need to be moved?', type: 'yesno' },
+      { key: 'psu2',             q: 'Is a <strong>2nd Power Supply</strong> being added?', type: 'yesno' },
+      { key: 'dhcp_dns_roles',   q: 'Do <strong>DHCP / DNS Roles</strong> need to be moved?', type: 'yesno' },
+      { key: 'data_gb',          q: 'How many <strong>GB of data</strong> need to be migrated server-to-server?', type: 'number', hint: 'e.g. 0' },
+      { key: 'cals',             q: 'Are <strong>CALs</strong> required?', type: 'yesno' },
+      { key: 'backups',          q: 'Does <strong>Backup</strong> configuration need to be added?', type: 'yesno' },
+      { key: 'third_party',      q: 'Is <strong>3rd Party vendor</strong> involvement required?', type: 'yesno' },
+      { key: 'pm_fee',           q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
     ],
     calc: (a) => {
-      let hrs = 0;
-      hrs += (parseFloat(a.physical_install)||0) * 1;
-      hrs += (parseFloat(a.raid_os)||0) * 3;
-      hrs += (parseFloat(a.hyperv)||0) * 1;
-      hrs += (parseFloat(a.dc_promo)||0) * 2;
-      hrs += (parseFloat(a.dc_demotion)||0) * 2;
-      hrs += (parseFloat(a.vms)||0) * 1;
-      if (a.extra_cpu==='yes') hrs += 0.5;
-      if (a.extra_ram==='yes') hrs += 0.25;
-      if (a.ilo==='yes') hrs += 0.5;
-      if (a.fsmo==='yes') hrs += 0.5;
-      if (a.psu2==='yes') hrs += 0.25;
-      if (a.dhcp_dns_roles==='yes') hrs += 1;
-      hrs += (parseFloat(a.data_migration_gb)||0) * 0.01;
-      if (a.cals==='yes') hrs += 0.25;
-      if (a.backups==='yes') hrs += 0.5;
-      if (a.third_party==='yes') hrs += 1;
-      hrs += 1; // documentation
-      let cost = hrs * RATE;
-      if (a.pm_fee==='yes') cost *= 1.20;
-      return { hrs: round(hrs), cost: round(cost), pm: a.pm_fee==='yes' };
+      let h = 0;
+      h += (parseFloat(a.physical_install)||0)*1;
+      h += (parseFloat(a.raid_os)||0)*3;
+      h += (parseFloat(a.hyperv)||0)*1;
+      h += (parseFloat(a.dc_promo)||0)*2;
+      h += (parseFloat(a.dc_demotion)||0)*2;
+      h += (parseFloat(a.vms)||0)*1;
+      if (a.extra_cpu==='yes') h += 0.5;
+      if (a.extra_ram==='yes') h += 0.25;
+      if (a.ilo==='yes') h += 0.5;
+      if (a.fsmo==='yes') h += 0.5;
+      if (a.psu2==='yes') h += 0.25;
+      if (a.dhcp_dns_roles==='yes') h += 1;
+      h += (parseFloat(a.data_gb)||0)*0.01;
+      if (a.cals==='yes') h += 0.25;
+      if (a.backups==='yes') h += 0.5;
+      if (a.third_party==='yes') h += 1;
+      h += 1;
+      let c = h*RATE; if (a.pm_fee==='yes') c *= 1.2;
+      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes' };
     },
     breakdown: (a) => {
-      let rows = [];
-      if ((parseFloat(a.physical_install)||0)>0) rows.push([`Physical Server Install (x${a.physical_install})`, round((parseFloat(a.physical_install)||0)*1)]);
-      if ((parseFloat(a.raid_os)||0)>0) rows.push([`RAID/OS/IP Setup (x${a.raid_os})`, round((parseFloat(a.raid_os)||0)*3)]);
-      if ((parseFloat(a.hyperv)||0)>0) rows.push([`Hyper-V Setup (x${a.hyperv})`, round((parseFloat(a.hyperv)||0)*1)]);
-      if ((parseFloat(a.dc_promo)||0)>0) rows.push([`DC Promotion (x${a.dc_promo})`, round((parseFloat(a.dc_promo)||0)*2)]);
-      if ((parseFloat(a.dc_demotion)||0)>0) rows.push([`DC Demotion (x${a.dc_demotion})`, round((parseFloat(a.dc_demotion)||0)*2)]);
-      if ((parseFloat(a.vms)||0)>0) rows.push([`VM Build (x${a.vms})`, round((parseFloat(a.vms)||0)*1)]);
-      if (a.extra_cpu==='yes') rows.push(['Extra Processor Install', 0.5]);
-      if (a.extra_ram==='yes') rows.push(['Extra RAM / Cooling Fan', 0.25]);
-      if (a.ilo==='yes') rows.push(['ILO Setup', 0.5]);
-      if (a.fsmo==='yes') rows.push(['Move FSMO', 0.5]);
-      if (a.psu2==='yes') rows.push(['2nd Power Supply', 0.25]);
-      if (a.dhcp_dns_roles==='yes') rows.push(['Move DHCP/DNS Roles', 1]);
-      if ((parseFloat(a.data_migration_gb)||0)>0) rows.push([`Data Migration (${a.data_migration_gb} GB)`, round((parseFloat(a.data_migration_gb)||0)*0.01)]);
-      if (a.cals==='yes') rows.push(['Add CALs', 0.25]);
-      if (a.backups==='yes') rows.push(['Backup Configuration', 0.5]);
-      if (a.third_party==='yes') rows.push(['3rd Party Support Management', 1]);
-      rows.push(['Documentation', 1]);
-      return rows;
+      let r = [];
+      if ((parseFloat(a.physical_install)||0)>0) r.push([`Physical Server Install (×${a.physical_install})`, round((parseFloat(a.physical_install)||0)*1)]);
+      if ((parseFloat(a.raid_os)||0)>0) r.push([`RAID/OS/IP Setup (×${a.raid_os})`, round((parseFloat(a.raid_os)||0)*3)]);
+      if ((parseFloat(a.hyperv)||0)>0) r.push([`Hyper-V Setup (×${a.hyperv})`, round((parseFloat(a.hyperv)||0)*1)]);
+      if ((parseFloat(a.dc_promo)||0)>0) r.push([`DC Promotion (×${a.dc_promo})`, round((parseFloat(a.dc_promo)||0)*2)]);
+      if ((parseFloat(a.dc_demotion)||0)>0) r.push([`DC Demotion (×${a.dc_demotion})`, round((parseFloat(a.dc_demotion)||0)*2)]);
+      if ((parseFloat(a.vms)||0)>0) r.push([`VM Build (×${a.vms})`, round((parseFloat(a.vms)||0)*1)]);
+      if (a.extra_cpu==='yes') r.push(['Extra Processor Install', 0.5]);
+      if (a.extra_ram==='yes') r.push(['Extra RAM / Cooling Fan', 0.25]);
+      if (a.ilo==='yes') r.push(['ILO Setup', 0.5]);
+      if (a.fsmo==='yes') r.push(['Move FSMO', 0.5]);
+      if (a.psu2==='yes') r.push(['2nd Power Supply', 0.25]);
+      if (a.dhcp_dns_roles==='yes') r.push(['Move DHCP/DNS Roles', 1]);
+      if ((parseFloat(a.data_gb)||0)>0) r.push([`Data Migration (${a.data_gb} GB)`, round((parseFloat(a.data_gb)||0)*0.01)]);
+      if (a.cals==='yes') r.push(['Add CALs', 0.25]);
+      if (a.backups==='yes') r.push(['Backup Configuration', 0.5]);
+      if (a.third_party==='yes') r.push(['3rd Party Support Management', 1]);
+      r.push(['Documentation', 1]);
+      return r;
     }
   },
-
   network: {
-    name: 'Network Upgrade',
-    icon: '🌐',
+    name: 'Network Upgrade', icon: '🌐',
     steps: [
       { key: 'sw48_poe',    q: 'How many <strong>48-port POE switches</strong> need to be replaced?', type: 'number', hint: 'e.g. 0' },
       { key: 'sw24_poe',    q: 'How many <strong>24-port POE switches</strong> need to be replaced?', type: 'number', hint: 'e.g. 0' },
@@ -606,11 +665,9 @@ const PROJECTS = {
       { key: 'sw48',        q: 'How many <strong>48-port (non-POE) switches</strong> need to be replaced?', type: 'number', hint: 'e.g. 1' },
       { key: 'sw24',        q: 'How many <strong>24-port switches</strong> need to be replaced?', type: 'number', hint: 'e.g. 0' },
       { key: 'sw10',        q: 'How many <strong>10-port switches</strong> need to be replaced?', type: 'number', hint: 'e.g. 0' },
-      { key: 'vlans',       q: 'How many <strong>VLANs</strong> are required? (Labour is only added for more than 5)', type: 'number', hint: 'e.g. 3' },
+      { key: 'vlans',       q: 'How many <strong>VLANs</strong> are required? (Labour added for more than 5)', type: 'number', hint: 'e.g. 3' },
       { key: 'cable_mgmt',  q: 'How many <strong>cable management bars</strong> need to be installed?', type: 'number', hint: 'e.g. 4' },
       { key: 'eth_cables',  q: 'How many <strong>bundles of Ethernet cables</strong> (10 per bundle) need to be run?', type: 'number', hint: 'e.g. 0' },
-      { key: 'gbics',       q: 'How many <strong>GBICs / SFPs</strong> need to be installed?', type: 'number', hint: 'e.g. 2' },
-      { key: 'fibre',       q: 'How many <strong>fibre cables</strong> need to be installed?', type: 'number', hint: 'e.g. 0' },
       { key: 'iec_pdu',     q: 'How many <strong>IEC PDUs</strong> (8 socket) need to be installed?', type: 'number', hint: 'e.g. 0' },
       { key: 'uk_pdu',      q: 'How many <strong>UK PDUs</strong> (8 socket) need to be installed?', type: 'number', hint: 'e.g. 0' },
       { key: 'shelves',     q: 'How many <strong>rack shelves</strong> need to be installed?', type: 'number', hint: 'e.g. 0' },
@@ -622,226 +679,182 @@ const PROJECTS = {
       { key: 'pm_fee',      q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
     ],
     calc: (a) => {
-      let hrs = 0;
-      hrs += (parseFloat(a.sw48_poe)||0) * 4;
-      hrs += (parseFloat(a.sw24_poe)||0) * 2.75;
-      hrs += (parseFloat(a.sw10_poe)||0) * 2;
-      hrs += (parseFloat(a.sw48)||0) * 4;
-      hrs += (parseFloat(a.sw24)||0) * 2.75;
-      hrs += (parseFloat(a.sw10)||0) * 2;
-      const vlans = parseFloat(a.vlans)||0;
-      if (vlans > 5) hrs += (vlans - 5) * 0.25;
-      hrs += (parseFloat(a.cable_mgmt)||0) * 0.25;
-      hrs += (parseFloat(a.eth_cables)||0) * 0.25;
-      // GBICs – no standard hours in sheet (listed as 0), skip
-      if (a.flood_mon==='yes') hrs += 0.5;
-      if (a.temp_mon==='yes') hrs += 0.5;
-      hrs += (parseFloat(a.rack_ups)||0) * 2;
-      hrs += (parseFloat(a.standalone_ups)||0) * 1.5;
-      hrs += (parseFloat(a.iec_pdu)||0) * 0.5;
-      hrs += (parseFloat(a.uk_pdu)||0) * 0.5;
-      hrs += (parseFloat(a.shelves)||0) * 0.2;
-      if (a.third_party==='yes') hrs += 1;
-      hrs += 1; // documentation
-      let cost = hrs * RATE;
-      if (a.pm_fee==='yes') cost *= 1.20;
-      return { hrs: round(hrs), cost: round(cost), pm: a.pm_fee==='yes' };
+      let h = 0;
+      h += (parseFloat(a.sw48_poe)||0)*4; h += (parseFloat(a.sw24_poe)||0)*2.75; h += (parseFloat(a.sw10_poe)||0)*2;
+      h += (parseFloat(a.sw48)||0)*4; h += (parseFloat(a.sw24)||0)*2.75; h += (parseFloat(a.sw10)||0)*2;
+      const v = parseFloat(a.vlans)||0; if (v>5) h += (v-5)*0.25;
+      h += (parseFloat(a.cable_mgmt)||0)*0.25;
+      h += (parseFloat(a.eth_cables)||0)*0.25;
+      h += (parseFloat(a.iec_pdu)||0)*0.5; h += (parseFloat(a.uk_pdu)||0)*0.5;
+      h += (parseFloat(a.shelves)||0)*0.2;
+      if (a.flood_mon==='yes') h += 0.5; if (a.temp_mon==='yes') h += 0.5;
+      h += (parseFloat(a.rack_ups)||0)*2; h += (parseFloat(a.standalone_ups)||0)*1.5;
+      if (a.third_party==='yes') h += 1;
+      h += 1;
+      let c = h*RATE; if (a.pm_fee==='yes') c *= 1.2;
+      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes' };
     },
     breakdown: (a) => {
-      let rows = [];
-      if ((parseFloat(a.sw48_poe)||0)>0) rows.push([`48-Port POE Switches (x${a.sw48_poe})`, round((parseFloat(a.sw48_poe)||0)*4)]);
-      if ((parseFloat(a.sw24_poe)||0)>0) rows.push([`24-Port POE Switches (x${a.sw24_poe})`, round((parseFloat(a.sw24_poe)||0)*2.75)]);
-      if ((parseFloat(a.sw10_poe)||0)>0) rows.push([`10-Port POE Switches (x${a.sw10_poe})`, round((parseFloat(a.sw10_poe)||0)*2)]);
-      if ((parseFloat(a.sw48)||0)>0) rows.push([`48-Port Switches (x${a.sw48})`, round((parseFloat(a.sw48)||0)*4)]);
-      if ((parseFloat(a.sw24)||0)>0) rows.push([`24-Port Switches (x${a.sw24})`, round((parseFloat(a.sw24)||0)*2.75)]);
-      if ((parseFloat(a.sw10)||0)>0) rows.push([`10-Port Switches (x${a.sw10})`, round((parseFloat(a.sw10)||0)*2)]);
-      const vlans = parseFloat(a.vlans)||0;
-      if (vlans>5) rows.push([`VLAN Config (${vlans-5} extra VLANs)`, round((vlans-5)*0.25)]);
-      if ((parseFloat(a.cable_mgmt)||0)>0) rows.push([`Cable Management (x${a.cable_mgmt})`, round((parseFloat(a.cable_mgmt)||0)*0.25)]);
-      if ((parseFloat(a.eth_cables)||0)>0) rows.push([`Ethernet Cable Runs (x${a.eth_cables} bundles)`, round((parseFloat(a.eth_cables)||0)*0.25)]);
-      if (a.flood_mon==='yes') rows.push(['Flood Monitoring', 0.5]);
-      if (a.temp_mon==='yes') rows.push(['Temperature Monitoring', 0.5]);
-      if ((parseFloat(a.rack_ups)||0)>0) rows.push([`Rack-Mounted UPS (x${a.rack_ups})`, round((parseFloat(a.rack_ups)||0)*2)]);
-      if ((parseFloat(a.standalone_ups)||0)>0) rows.push([`Standalone UPS (x${a.standalone_ups})`, round((parseFloat(a.standalone_ups)||0)*1.5)]);
-      if ((parseFloat(a.iec_pdu)||0)>0) rows.push([`IEC PDU (x${a.iec_pdu})`, round((parseFloat(a.iec_pdu)||0)*0.5)]);
-      if ((parseFloat(a.uk_pdu)||0)>0) rows.push([`UK PDU (x${a.uk_pdu})`, round((parseFloat(a.uk_pdu)||0)*0.5)]);
-      if ((parseFloat(a.shelves)||0)>0) rows.push([`Rack Shelves (x${a.shelves})`, round((parseFloat(a.shelves)||0)*0.2)]);
-      if (a.third_party==='yes') rows.push(['3rd Party Support Management', 1]);
-      rows.push(['Documentation', 1]);
-      return rows;
+      let r = [];
+      if ((parseFloat(a.sw48_poe)||0)>0) r.push([`48-Port POE Switches (×${a.sw48_poe})`, round((parseFloat(a.sw48_poe)||0)*4)]);
+      if ((parseFloat(a.sw24_poe)||0)>0) r.push([`24-Port POE Switches (×${a.sw24_poe})`, round((parseFloat(a.sw24_poe)||0)*2.75)]);
+      if ((parseFloat(a.sw10_poe)||0)>0) r.push([`10-Port POE Switches (×${a.sw10_poe})`, round((parseFloat(a.sw10_poe)||0)*2)]);
+      if ((parseFloat(a.sw48)||0)>0) r.push([`48-Port Switches (×${a.sw48})`, round((parseFloat(a.sw48)||0)*4)]);
+      if ((parseFloat(a.sw24)||0)>0) r.push([`24-Port Switches (×${a.sw24})`, round((parseFloat(a.sw24)||0)*2.75)]);
+      if ((parseFloat(a.sw10)||0)>0) r.push([`10-Port Switches (×${a.sw10})`, round((parseFloat(a.sw10)||0)*2)]);
+      const v = parseFloat(a.vlans)||0; if (v>5) r.push([`VLAN Config (${v-5} extra)`, round((v-5)*0.25)]);
+      if ((parseFloat(a.cable_mgmt)||0)>0) r.push([`Cable Management (×${a.cable_mgmt})`, round((parseFloat(a.cable_mgmt)||0)*0.25)]);
+      if ((parseFloat(a.eth_cables)||0)>0) r.push([`Ethernet Cable Runs (×${a.eth_cables})`, round((parseFloat(a.eth_cables)||0)*0.25)]);
+      if (a.flood_mon==='yes') r.push(['Flood Monitoring', 0.5]);
+      if (a.temp_mon==='yes') r.push(['Temperature Monitoring', 0.5]);
+      if ((parseFloat(a.rack_ups)||0)>0) r.push([`Rack-Mounted UPS (×${a.rack_ups})`, round((parseFloat(a.rack_ups)||0)*2)]);
+      if ((parseFloat(a.standalone_ups)||0)>0) r.push([`Standalone UPS (×${a.standalone_ups})`, round((parseFloat(a.standalone_ups)||0)*1.5)]);
+      if ((parseFloat(a.iec_pdu)||0)>0) r.push([`IEC PDU (×${a.iec_pdu})`, round((parseFloat(a.iec_pdu)||0)*0.5)]);
+      if ((parseFloat(a.uk_pdu)||0)>0) r.push([`UK PDU (×${a.uk_pdu})`, round((parseFloat(a.uk_pdu)||0)*0.5)]);
+      if ((parseFloat(a.shelves)||0)>0) r.push([`Rack Shelves (×${a.shelves})`, round((parseFloat(a.shelves)||0)*0.2)]);
+      if (a.third_party==='yes') r.push(['3rd Party Support Management', 1]);
+      r.push(['Documentation', 1]);
+      return r;
     }
   },
-
   smtp: {
-    name: 'SMTP Secure Send',
-    icon: '📧',
+    name: 'SMTP Secure Send', icon: '📧',
     steps: [
-      { key: 'smtp_client',  q: 'How many <strong>SMTP clients</strong> need to be configured?', type: 'number', hint: 'e.g. 1' },
-      { key: 'printers',     q: 'How many <strong>printers</strong> need to be set up for SMTP?', type: 'number', hint: 'e.g. 2' },
-      { key: 'uri_ports',    q: 'How many <strong>UriPorts configurations</strong> are needed?', type: 'number', hint: 'e.g. 1' },
-      { key: 'pm_fee',       q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
+      { key: 'smtp_client', q: 'How many <strong>SMTP clients</strong> need to be configured?', type: 'number', hint: 'e.g. 1' },
+      { key: 'printers',    q: 'How many <strong>printers</strong> need to be set up for SMTP?', type: 'number', hint: 'e.g. 2' },
+      { key: 'uri_ports',   q: 'How many <strong>UriPorts configurations</strong> are needed?', type: 'number', hint: 'e.g. 1' },
+      { key: 'pm_fee',      q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
     ],
     calc: (a) => {
-      let hrs = 0;
-      hrs += (parseFloat(a.smtp_client)||0) * 0.25;
-      hrs += (parseFloat(a.printers)||0) * 0.25;
-      hrs += (parseFloat(a.uri_ports)||0) * 1;
-      let cost = hrs * RATE;
-      if (a.pm_fee==='yes') cost *= 1.20;
-      return { hrs: round(hrs), cost: round(cost), pm: a.pm_fee==='yes' };
+      let h = (parseFloat(a.smtp_client)||0)*0.25 + (parseFloat(a.printers)||0)*0.25 + (parseFloat(a.uri_ports)||0)*1;
+      let c = h*RATE; if (a.pm_fee==='yes') c *= 1.2;
+      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes' };
     },
     breakdown: (a) => {
-      let rows = [];
-      if ((parseFloat(a.smtp_client)||0)>0) rows.push([`SMTP Client Setup (x${a.smtp_client})`, round((parseFloat(a.smtp_client)||0)*0.25)]);
-      if ((parseFloat(a.printers)||0)>0) rows.push([`Printer Setup (x${a.printers})`, round((parseFloat(a.printers)||0)*0.25)]);
-      if ((parseFloat(a.uri_ports)||0)>0) rows.push([`UriPorts Configuration (x${a.uri_ports})`, round((parseFloat(a.uri_ports)||0)*1)]);
-      return rows;
+      let r = [];
+      if ((parseFloat(a.smtp_client)||0)>0) r.push([`SMTP Client Setup (×${a.smtp_client})`, round((parseFloat(a.smtp_client)||0)*0.25)]);
+      if ((parseFloat(a.printers)||0)>0) r.push([`Printer Setup (×${a.printers})`, round((parseFloat(a.printers)||0)*0.25)]);
+      if ((parseFloat(a.uri_ports)||0)>0) r.push([`UriPorts Configuration (×${a.uri_ports})`, round((parseFloat(a.uri_ports)||0)*1)]);
+      return r;
     }
   },
-
   mdm: {
-    name: 'MDM / MAM',
-    icon: '📱',
+    name: 'MDM / MAM', icon: '📱',
     steps: [
-      { key: 'licenses',     q: 'How many <strong>licences</strong> need to be applied?', type: 'number', hint: 'e.g. 0' },
-      { key: 'mdm_policy',   q: 'Does an <strong>MDM Policy</strong> need to be configured?', type: 'yesno' },
-      { key: 'mam_policy',   q: 'Does a <strong>MAM Policy</strong> need to be configured?', type: 'yesno' },
-      { key: 'mdm_enrol',    q: 'How many <strong>devices</strong> need to be enrolled in the MDM Policy?', type: 'number', hint: 'e.g. 0' },
-      { key: 'mam_enrol',    q: 'How many <strong>devices</strong> need to be enrolled in the MAM Policy?', type: 'number', hint: 'e.g. 0' },
-      { key: 'onsite',       q: 'Is <strong>onsite assistance</strong> required for device enrolment?', type: 'yesno' },
-      { key: 'pm_fee',       q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
+      { key: 'licenses',   q: 'How many <strong>licences</strong> need to be applied?', type: 'number', hint: 'e.g. 0' },
+      { key: 'mdm_policy', q: 'Does an <strong>MDM Policy</strong> need to be configured?', type: 'yesno' },
+      { key: 'mam_policy', q: 'Does a <strong>MAM Policy</strong> need to be configured?', type: 'yesno' },
+      { key: 'mdm_enrol',  q: 'How many <strong>devices</strong> need to be enrolled in the MDM Policy?', type: 'number', hint: 'e.g. 0' },
+      { key: 'mam_enrol',  q: 'How many <strong>devices</strong> need to be enrolled in the MAM Policy?', type: 'number', hint: 'e.g. 0' },
+      { key: 'onsite',     q: 'Is <strong>onsite assistance</strong> required for device enrolment?', type: 'yesno' },
+      { key: 'pm_fee',     q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
     ],
     calc: (a) => {
-      let hrs = 0;
-      hrs += (parseFloat(a.licenses)||0) * 0.1;
-      if (a.mdm_policy==='yes') hrs += 3.75;
-      if (a.mam_policy==='yes') hrs += 3.75;
-      hrs += (parseFloat(a.mdm_enrol)||0) * 0.1;
-      hrs += (parseFloat(a.mam_enrol)||0) * 0.25;
-      if (a.onsite==='yes') hrs += 7.5;
-      hrs += 1; // documentation
-      let cost = hrs * RATE;
-      if (a.pm_fee==='yes') cost *= 1.20;
-      return { hrs: round(hrs), cost: round(cost), pm: a.pm_fee==='yes' };
+      let h = (parseFloat(a.licenses)||0)*0.1;
+      if (a.mdm_policy==='yes') h += 3.75;
+      if (a.mam_policy==='yes') h += 3.75;
+      h += (parseFloat(a.mdm_enrol)||0)*0.1 + (parseFloat(a.mam_enrol)||0)*0.25;
+      if (a.onsite==='yes') h += 7.5;
+      h += 1;
+      let c = h*RATE; if (a.pm_fee==='yes') c *= 1.2;
+      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes' };
     },
     breakdown: (a) => {
-      let rows = [];
-      if ((parseFloat(a.licenses)||0)>0) rows.push([`Apply Licences (x${a.licenses})`, round((parseFloat(a.licenses)||0)*0.1)]);
-      if (a.mdm_policy==='yes') rows.push(['Configure MDM Policy', 3.75]);
-      if (a.mam_policy==='yes') rows.push(['Configure MAM Policy', 3.75]);
-      if ((parseFloat(a.mdm_enrol)||0)>0) rows.push([`MDM Device Enrolment (x${a.mdm_enrol})`, round((parseFloat(a.mdm_enrol)||0)*0.1)]);
-      if ((parseFloat(a.mam_enrol)||0)>0) rows.push([`MAM Device Enrolment (x${a.mam_enrol})`, round((parseFloat(a.mam_enrol)||0)*0.25)]);
-      if (a.onsite==='yes') rows.push(['Onsite Assistance', 7.5]);
-      rows.push(['Documentation', 1]);
-      return rows;
+      let r = [];
+      if ((parseFloat(a.licenses)||0)>0) r.push([`Apply Licences (×${a.licenses})`, round((parseFloat(a.licenses)||0)*0.1)]);
+      if (a.mdm_policy==='yes') r.push(['Configure MDM Policy', 3.75]);
+      if (a.mam_policy==='yes') r.push(['Configure MAM Policy', 3.75]);
+      if ((parseFloat(a.mdm_enrol)||0)>0) r.push([`MDM Device Enrolment (×${a.mdm_enrol})`, round((parseFloat(a.mdm_enrol)||0)*0.1)]);
+      if ((parseFloat(a.mam_enrol)||0)>0) r.push([`MAM Device Enrolment (×${a.mam_enrol})`, round((parseFloat(a.mam_enrol)||0)*0.25)]);
+      if (a.onsite==='yes') r.push(['Onsite Assistance', 7.5]);
+      r.push(['Documentation', 1]);
+      return r;
     }
   },
-
   avd: {
-    name: 'Azure Virtual Desktop',
-    icon: '🖱️',
+    name: 'Azure Virtual Desktop', icon: '🖱️',
     steps: [
-      { key: 'licenses',     q: 'How many <strong>AVD licences</strong> need to be applied?', type: 'number', hint: 'e.g. 0' },
-      { key: 'dc_build',     q: 'Is a <strong>Domain Controller build</strong> in Azure required?', type: 'yesno' },
-      { key: 'azure_files',  q: 'How many <strong>Azure Files shares</strong> need to be built? (includes GPOs, FSLogix, Scaling)', type: 'number', hint: 'e.g. 1' },
-      { key: 'pool_servers', q: 'How many <strong>Pool Servers</strong> need to be built?', type: 'number', hint: 'e.g. 1' },
-      { key: 'app_servers',  q: 'How many <strong>Application Servers</strong> need to be built?', type: 'number', hint: 'e.g. 0' },
-      { key: 'vendor_apps',  q: 'How many servers require <strong>Vendor Application Management</strong>?', type: 'number', hint: 'e.g. 0' },
-      { key: 'end_user_devices', q: 'How many <strong>end-user devices</strong> need to be configured?', type: 'number', hint: 'e.g. 0' },
-      { key: 'pm_fee',       q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
+      { key: 'licenses',        q: 'How many <strong>AVD licences</strong> need to be applied?', type: 'number', hint: 'e.g. 0' },
+      { key: 'dc_build',        q: 'Is a <strong>Domain Controller build</strong> in Azure required?', type: 'yesno' },
+      { key: 'azure_files',     q: 'How many <strong>Azure Files shares</strong> need to be built? (includes GPOs, FSLogix, Scaling)', type: 'number', hint: 'e.g. 1' },
+      { key: 'pool_servers',    q: 'How many <strong>Pool Servers</strong> need to be built?', type: 'number', hint: 'e.g. 1' },
+      { key: 'app_servers',     q: 'How many <strong>Application Servers</strong> need to be built?', type: 'number', hint: 'e.g. 0' },
+      { key: 'vendor_apps',     q: 'How many servers require <strong>Vendor Application Management</strong>?', type: 'number', hint: 'e.g. 0' },
+      { key: 'end_user_devices',q: 'How many <strong>end-user devices</strong> need to be configured?', type: 'number', hint: 'e.g. 0' },
+      { key: 'pm_fee',          q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
     ],
     calc: (a) => {
-      let hrs = 0;
-      hrs += (parseFloat(a.licenses)||0) * 0.1;
-      if (a.dc_build==='yes') hrs += 3.75;
-      hrs += (parseFloat(a.azure_files)||0) * 3.75;
-      hrs += (parseFloat(a.pool_servers)||0) * 2;
-      hrs += (parseFloat(a.app_servers)||0) * 2;
-      hrs += (parseFloat(a.vendor_apps)||0) * 2;
-      hrs += (parseFloat(a.end_user_devices)||0) * 0.25;
-      hrs += 1; // documentation
-      let cost = hrs * RATE;
-      if (a.pm_fee==='yes') cost *= 1.20;
-      return { hrs: round(hrs), cost: round(cost), pm: a.pm_fee==='yes' };
+      let h = (parseFloat(a.licenses)||0)*0.1;
+      if (a.dc_build==='yes') h += 3.75;
+      h += (parseFloat(a.azure_files)||0)*3.75 + (parseFloat(a.pool_servers)||0)*2 + (parseFloat(a.app_servers)||0)*2 + (parseFloat(a.vendor_apps)||0)*2 + (parseFloat(a.end_user_devices)||0)*0.25;
+      h += 1;
+      let c = h*RATE; if (a.pm_fee==='yes') c *= 1.2;
+      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes' };
     },
     breakdown: (a) => {
-      let rows = [];
-      if ((parseFloat(a.licenses)||0)>0) rows.push([`Apply Licences (x${a.licenses})`, round((parseFloat(a.licenses)||0)*0.1)]);
-      if (a.dc_build==='yes') rows.push(['Domain Controller Build', 3.75]);
-      if ((parseFloat(a.azure_files)||0)>0) rows.push([`Azure Files (x${a.azure_files})`, round((parseFloat(a.azure_files)||0)*3.75)]);
-      if ((parseFloat(a.pool_servers)||0)>0) rows.push([`Pool Servers (x${a.pool_servers})`, round((parseFloat(a.pool_servers)||0)*2)]);
-      if ((parseFloat(a.app_servers)||0)>0) rows.push([`Application Servers (x${a.app_servers})`, round((parseFloat(a.app_servers)||0)*2)]);
-      if ((parseFloat(a.vendor_apps)||0)>0) rows.push([`Vendor App Management (x${a.vendor_apps})`, round((parseFloat(a.vendor_apps)||0)*2)]);
-      if ((parseFloat(a.end_user_devices)||0)>0) rows.push([`End User Device Config (x${a.end_user_devices})`, round((parseFloat(a.end_user_devices)||0)*0.25)]);
-      rows.push(['Documentation', 1]);
-      return rows;
+      let r = [];
+      if ((parseFloat(a.licenses)||0)>0) r.push([`Apply Licences (×${a.licenses})`, round((parseFloat(a.licenses)||0)*0.1)]);
+      if (a.dc_build==='yes') r.push(['Domain Controller Build', 3.75]);
+      if ((parseFloat(a.azure_files)||0)>0) r.push([`Azure Files (×${a.azure_files})`, round((parseFloat(a.azure_files)||0)*3.75)]);
+      if ((parseFloat(a.pool_servers)||0)>0) r.push([`Pool Servers (×${a.pool_servers})`, round((parseFloat(a.pool_servers)||0)*2)]);
+      if ((parseFloat(a.app_servers)||0)>0) r.push([`Application Servers (×${a.app_servers})`, round((parseFloat(a.app_servers)||0)*2)]);
+      if ((parseFloat(a.vendor_apps)||0)>0) r.push([`Vendor App Management (×${a.vendor_apps})`, round((parseFloat(a.vendor_apps)||0)*2)]);
+      if ((parseFloat(a.end_user_devices)||0)>0) r.push([`End User Device Config (×${a.end_user_devices})`, round((parseFloat(a.end_user_devices)||0)*0.25)]);
+      r.push(['Documentation', 1]);
+      return r;
     }
   },
-
   recycle: {
-    name: 'Recycling',
-    icon: '♻️',
+    name: 'Recycling', icon: '♻️',
     steps: [
-      { key: 'servers',      q: 'How many <strong>servers</strong> need to be recycled?', type: 'number', hint: 'e.g. 0' },
-      { key: 'pcs',          q: 'How many <strong>PCs / Laptops</strong> need to be recycled?', type: 'number', hint: 'e.g. 0' },
-      { key: 'storage',      q: 'How many <strong>storage devices</strong> need to be recycled?', type: 'number', hint: 'e.g. 0' },
-      { key: 'network_eq',   q: 'How many <strong>network equipment items</strong> need to be recycled? (Firewalls, Switches, APs)', type: 'number', hint: 'e.g. 0' },
-      { key: 'ups',          q: 'How many <strong>UPS units</strong> (including batteries) need to be recycled?', type: 'number', hint: 'e.g. 0' },
-      { key: 'ups_batteries',q: 'How many <strong>UPS batteries</strong> need to be removed separately?', type: 'number', hint: 'e.g. 0' },
-      { key: 'cert_disks',   q: 'How many <strong>disks</strong> require <strong>certified destruction</strong>?', type: 'number', hint: 'e.g. 0' },
-      { key: 'uncert_disks', q: 'How many <strong>disks</strong> require <strong>uncertified destruction</strong>?', type: 'number', hint: 'e.g. 0' },
-      { key: 'pm_fee',       q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
+      { key: 'servers',       q: 'How many <strong>servers</strong> need to be recycled?', type: 'number', hint: 'e.g. 0' },
+      { key: 'pcs',           q: 'How many <strong>PCs / Laptops</strong> need to be recycled?', type: 'number', hint: 'e.g. 0' },
+      { key: 'storage',       q: 'How many <strong>storage devices</strong> need to be recycled?', type: 'number', hint: 'e.g. 0' },
+      { key: 'network_eq',    q: 'How many <strong>network equipment items</strong> need to be recycled? (Firewalls, Switches, APs)', type: 'number', hint: 'e.g. 0' },
+      { key: 'ups',           q: 'How many <strong>UPS units</strong> (including batteries) need to be recycled?', type: 'number', hint: 'e.g. 0' },
+      { key: 'ups_batteries', q: 'How many <strong>UPS batteries</strong> need to be removed separately?', type: 'number', hint: 'e.g. 0' },
+      { key: 'cert_disks',    q: 'How many <strong>disks</strong> require <strong>certified destruction</strong>?', type: 'number', hint: 'e.g. 0' },
+      { key: 'uncert_disks',  q: 'How many <strong>disks</strong> require <strong>uncertified destruction</strong>?', type: 'number', hint: 'e.g. 0' },
+      { key: 'pm_fee',        q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
     ],
     calc: (a) => {
-      let hrs = 0;
-      hrs += (parseFloat(a.servers)||0) * 0.2;
-      hrs += (parseFloat(a.pcs)||0) * 0.1;
-      hrs += (parseFloat(a.storage)||0) * 0.2;
-      hrs += (parseFloat(a.network_eq)||0) * 0.2;
-      hrs += (parseFloat(a.ups)||0) * 0.25;
-      hrs += (parseFloat(a.ups_batteries)||0) * 0.2;
-      hrs += (parseFloat(a.cert_disks)||0) * 0.1;
-      hrs += (parseFloat(a.uncert_disks)||0) * 0.1;
-      let cost = hrs * RATE;
-      if (a.pm_fee==='yes') cost *= 1.20;
-      return { hrs: round(hrs), cost: round(cost), pm: a.pm_fee==='yes' };
+      let h = (parseFloat(a.servers)||0)*0.2 + (parseFloat(a.pcs)||0)*0.1 + (parseFloat(a.storage)||0)*0.2 + (parseFloat(a.network_eq)||0)*0.2 + (parseFloat(a.ups)||0)*0.25 + (parseFloat(a.ups_batteries)||0)*0.2 + (parseFloat(a.cert_disks)||0)*0.1 + (parseFloat(a.uncert_disks)||0)*0.1;
+      let c = h*RATE; if (a.pm_fee==='yes') c *= 1.2;
+      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes' };
     },
     breakdown: (a) => {
-      let rows = [];
-      if ((parseFloat(a.servers)||0)>0) rows.push([`Recycle Servers (x${a.servers})`, round((parseFloat(a.servers)||0)*0.2)]);
-      if ((parseFloat(a.pcs)||0)>0) rows.push([`Recycle PCs/Laptops (x${a.pcs})`, round((parseFloat(a.pcs)||0)*0.1)]);
-      if ((parseFloat(a.storage)||0)>0) rows.push([`Recycle Storage Devices (x${a.storage})`, round((parseFloat(a.storage)||0)*0.2)]);
-      if ((parseFloat(a.network_eq)||0)>0) rows.push([`Recycle Network Equipment (x${a.network_eq})`, round((parseFloat(a.network_eq)||0)*0.2)]);
-      if ((parseFloat(a.ups)||0)>0) rows.push([`Recycle UPS (x${a.ups})`, round((parseFloat(a.ups)||0)*0.25)]);
-      if ((parseFloat(a.ups_batteries)||0)>0) rows.push([`Recycle UPS Batteries (x${a.ups_batteries})`, round((parseFloat(a.ups_batteries)||0)*0.2)]);
-      if ((parseFloat(a.cert_disks)||0)>0) rows.push([`Certified Disk Destruction (x${a.cert_disks})`, round((parseFloat(a.cert_disks)||0)*0.1)]);
-      if ((parseFloat(a.uncert_disks)||0)>0) rows.push([`Uncertified Disk Destruction (x${a.uncert_disks})`, round((parseFloat(a.uncert_disks)||0)*0.1)]);
-      return rows;
+      let r = [];
+      if ((parseFloat(a.servers)||0)>0) r.push([`Recycle Servers (×${a.servers})`, round((parseFloat(a.servers)||0)*0.2)]);
+      if ((parseFloat(a.pcs)||0)>0) r.push([`Recycle PCs/Laptops (×${a.pcs})`, round((parseFloat(a.pcs)||0)*0.1)]);
+      if ((parseFloat(a.storage)||0)>0) r.push([`Recycle Storage Devices (×${a.storage})`, round((parseFloat(a.storage)||0)*0.2)]);
+      if ((parseFloat(a.network_eq)||0)>0) r.push([`Recycle Network Equipment (×${a.network_eq})`, round((parseFloat(a.network_eq)||0)*0.2)]);
+      if ((parseFloat(a.ups)||0)>0) r.push([`Recycle UPS (×${a.ups})`, round((parseFloat(a.ups)||0)*0.25)]);
+      if ((parseFloat(a.ups_batteries)||0)>0) r.push([`Recycle UPS Batteries (×${a.ups_batteries})`, round((parseFloat(a.ups_batteries)||0)*0.2)]);
+      if ((parseFloat(a.cert_disks)||0)>0) r.push([`Certified Disk Destruction (×${a.cert_disks})`, round((parseFloat(a.cert_disks)||0)*0.1)]);
+      if ((parseFloat(a.uncert_disks)||0)>0) r.push([`Uncertified Disk Destruction (×${a.uncert_disks})`, round((parseFloat(a.uncert_disks)||0)*0.1)]);
+      return r;
     }
   }
 };
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
-function round(n) { return Math.round(n * 100) / 100; }
-function fmt(n) { return n.toLocaleString('en-IE', {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
-function fmtHrs(n) { return n % 1 === 0 ? n.toString() : n.toFixed(2); }
-
-function scrollBottom() {
-  const m = document.getElementById('messages');
-  setTimeout(() => m.scrollTop = m.scrollHeight, 50);
-}
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function round(n) { return Math.round(n*100)/100; }
+function fmt(n) { return n.toLocaleString('en-IE', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+function fmtHrs(n) { return n%1===0 ? n.toString() : n.toFixed(2); }
+function scrollBottom() { const m=document.getElementById('messages'); setTimeout(()=>m.scrollTop=m.scrollHeight,50); }
+function delay(ms) { return new Promise(r=>setTimeout(r,ms)); }
 
 function addMsg(html, role='bot') {
   const msgs = document.getElementById('messages');
   const div = document.createElement('div');
   div.className = `msg ${role}`;
   const av = document.createElement('div');
-  av.className = `avatar ${role === 'bot' ? 'bot-av' : 'user-av'}`;
-  av.textContent = role === 'bot' ? '⚡' : '👤';
+  av.className = `avatar ${role==='bot'?'bot-av':'user-av'}`;
+  av.textContent = role==='bot' ? 'LT' : '👤';
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
   bubble.innerHTML = html;
-  if (role === 'bot') { div.appendChild(av); div.appendChild(bubble); }
+  if (role==='bot') { div.appendChild(av); div.appendChild(bubble); }
   else { div.appendChild(av); div.appendChild(bubble); }
   msgs.appendChild(div);
   scrollBottom();
@@ -851,58 +864,44 @@ function addMsg(html, role='bot') {
 function addTyping() {
   const msgs = document.getElementById('messages');
   const div = document.createElement('div');
-  div.className = 'msg bot';
-  div.id = 'typing';
-  div.innerHTML = `<div class="avatar bot-av">⚡</div><div class="bubble"><div class="typing-indicator"><span></span><span></span><span></span></div></div>`;
-  msgs.appendChild(div);
-  scrollBottom();
+  div.className = 'msg bot'; div.id = 'typing';
+  div.innerHTML = `<div class="avatar bot-av">LT</div><div class="bubble"><div class="typing-indicator"><span></span><span></span><span></span></div></div>`;
+  msgs.appendChild(div); scrollBottom();
 }
-function removeTyping() { const t = document.getElementById('typing'); if(t) t.remove(); }
+function removeTyping() { const t=document.getElementById('typing'); if(t) t.remove(); }
 
-function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-async function botSay(html, delayMs=600) {
-  addTyping();
-  await delay(delayMs);
-  removeTyping();
-  addMsg(html, 'bot');
+async function botSay(html, ms=500) {
+  addTyping(); await delay(ms); removeTyping(); addMsg(html,'bot');
 }
 
-// ─── Quick Replies ────────────────────────────────────────────────────────────
 function showQR(options) {
   const msgs = document.getElementById('messages');
   const div = document.createElement('div');
-  div.className = 'quick-replies';
-  div.id = 'qr-bar';
+  div.className = 'quick-replies'; div.id = 'qr-bar';
   options.forEach(o => {
     const btn = document.createElement('button');
-    btn.className = 'qr-btn';
-    btn.textContent = o;
+    btn.className = 'qr-btn'; btn.textContent = o;
     btn.onclick = () => { clearQR(); processAnswer(o); };
     div.appendChild(btn);
   });
-  msgs.appendChild(div);
-  scrollBottom();
+  msgs.appendChild(div); scrollBottom();
 }
+function clearQR() { const q=document.getElementById('qr-bar'); if(q) q.remove(); }
 
-function clearQR() { const q = document.getElementById('qr-bar'); if(q) q.remove(); }
-
-// ─── Session summary sidebar ──────────────────────────────────────────────────
 function updateSidebar() {
   const rows = document.getElementById('summaryRows');
   const total = document.getElementById('summaryTotal');
   rows.innerHTML = '';
-  let totalHrs = 0, totalCost = 0;
-  Object.entries(state.sessionResults).forEach(([k, r]) => {
+  let tH=0, tC=0;
+  Object.entries(state.sessionResults).forEach(([k,r]) => {
     const p = PROJECTS[k];
     const row = document.createElement('div');
     row.className = 'summary-row';
     row.innerHTML = `<span>${p.icon} ${p.name.split(' ')[0]}</span><span class="summary-val">${fmtHrs(r.hrs)} hrs</span>`;
     rows.appendChild(row);
-    totalHrs += r.hrs;
-    totalCost += r.cost;
+    tH += r.hrs; tC += r.cost;
   });
-  total.textContent = `${fmtHrs(round(totalHrs))} hrs / €${fmt(totalCost)}`;
+  total.textContent = `${fmtHrs(round(tH))} hrs / €${fmt(tC)}`;
 }
 
 function markDone(key) {
@@ -910,33 +909,24 @@ function markDone(key) {
   if (btn) btn.classList.add('done');
 }
 
-// ─── Flow Control ─────────────────────────────────────────────────────────────
 function startProject(key) {
-  // Highlight active button
-  document.querySelectorAll('.project-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.project-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById(`btn-${key}`).classList.add('active');
-
-  state.project = key;
-  state.step = 0;
-  state.answers = {};
+  state.project = key; state.step = 0; state.answers = {};
   const p = PROJECTS[key];
   addMsg(`<strong>${p.icon} ${p.name}</strong>`, 'user');
-  botSay(`Let's scope a <strong>${p.name}</strong> project. I'll ask you a few questions to calculate the required labour hours.<br><br>Answer with numbers or <span class="tag">yes</span> <span class="tag">no</span> for each item.`, 400).then(() => {
-    askStep();
-  });
+  botSay(`Let's scope a <strong>${p.name}</strong> project. I'll ask you ${p.steps.length} quick questions to calculate the required labour hours.<br><br>Answer with a number, or use the <strong>Yes / No</strong> buttons where shown.`, 350).then(askStep);
 }
 
 function askStep() {
   const p = PROJECTS[state.project];
-  if (state.step >= p.steps.length) {
-    showResult();
-    return;
-  }
+  if (state.step >= p.steps.length) { showResult(); return; }
   const s = p.steps[state.step];
-  let extra = '';
-  if (s.hint) extra = `<br><span style="color:var(--text-muted);font-size:11px">e.g. ${s.hint}</span>`;
-  botSay(`<strong>Q${state.step + 1}/${p.steps.length}</strong> — ${s.q}${extra}`, 400).then(() => {
-    if (s.type === 'yesno') showQR(['Yes', 'No']);
+  const pct = Math.round((state.step/p.steps.length)*100);
+  let extra = s.hint ? `<br><span style="color:var(--text-dim);font-size:12px">e.g. ${s.hint}</span>` : '';
+  const progress = `<div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${pct}%"></div></div>`;
+  botSay(`<span style="color:var(--text-muted);font-size:12px;font-weight:600;">Question ${state.step+1} of ${p.steps.length}</span><br>${s.q}${extra}${progress}`, 380).then(()=>{
+    if (s.type==='yesno') showQR(['Yes','No']);
   });
 }
 
@@ -945,119 +935,101 @@ function processAnswer(raw) {
   const p = PROJECTS[state.project];
   const s = p.steps[state.step];
   let val = raw.trim();
-
-  // Normalise yes/no
-  if (s.type === 'yesno') {
-    val = val.toLowerCase() === 'yes' || val === 'Yes' ? 'yes' : 'no';
+  if (s.type==='yesno') {
+    val = (val.toLowerCase()==='yes'||val==='Yes') ? 'yes' : 'no';
   } else {
     const num = parseFloat(val);
-    if (isNaN(num) || num < 0) {
-      addMsg(val, 'user');
-      botSay(`⚠️ Please enter a valid number (0 or higher).`);
-      if (s.type === 'yesno') showQR(['Yes', 'No']);
+    if (isNaN(num)||num<0) {
+      addMsg(val,'user');
+      botSay(`Please enter a valid number (0 or higher).`);
+      if (s.type==='yesno') showQR(['Yes','No']);
       return;
     }
     val = num;
   }
-
-  addMsg(s.type === 'yesno' ? (val === 'yes' ? '✅ Yes' : '❌ No') : val.toString(), 'user');
+  addMsg(s.type==='yesno' ? (val==='yes'?'✅  Yes':'❌  No') : val.toString(), 'user');
   state.answers[s.key] = val;
   state.step++;
-  setTimeout(askStep, 300);
+  setTimeout(askStep, 280);
 }
 
 function showResult() {
   const p = PROJECTS[state.project];
   const result = p.calc(state.answers);
-  const breakdown = p.breakdown(state.answers);
-
+  const bd = p.breakdown(state.answers);
   state.sessionResults[state.project] = result;
   markDone(state.project);
   updateSidebar();
 
-  let bdRows = breakdown.map(([label, hrs]) =>
-    `<div class="rc-row"><span>${label}</span><span class="rc-val">${fmtHrs(hrs)} hrs</span></div>`
+  const bdRows = bd.map(([label,hrs])=>
+    `<div class="rc-row"><span class="rc-label">${label}</span><span class="rc-val">${fmtHrs(hrs)} hrs</span></div>`
   ).join('');
-
-  const pmNote = result.pm ? `<div class="rc-row"><span>Project Management (20%)</span><span class="rc-val">included</span></div>` : '';
+  const pmNote = result.pm ? `<div class="rc-row"><span class="rc-label">Project Management Fee (20%)</span><span class="rc-val">included</span></div>` : '';
 
   botSay(`
-    ✅ <strong>${p.name} — Labour Estimate Complete</strong>
+    <strong>✅ ${p.name} — Estimate Complete</strong>
     <div class="result-card">
       ${bdRows}
       ${pmNote}
-      <div class="rc-row big"><span>Total Hours</span><span class="rc-val">${fmtHrs(result.hrs)} hrs</span></div>
-      <div class="rc-row big"><span>Total Cost (@ €${RATE}/hr)</span><span class="rc-val">€${fmt(result.cost)}</span></div>
+      <div class="rc-row big"><span class="rc-label">Total Labour Hours</span><span class="rc-val">${fmtHrs(result.hrs)} hrs</span></div>
+      <div class="rc-row big"><span class="rc-label">Total Cost <span style="font-weight:400;font-size:12px">(@ €${RATE}/hr)</span></span><span class="rc-val">€${fmt(result.cost)}</span></div>
     </div>
-  `, 500).then(() => {
-    botSay(`Would you like to scope another project, or are you done?`, 600).then(() => {
-      showQR(['Scope another project', 'Done — show full summary']);
-      document.querySelectorAll('.project-btn').forEach(b => b.classList.remove('active'));
+  `, 500).then(()=>{
+    botSay(`Would you like to scope another project, or view the full session summary?`, 500).then(()=>{
+      showQR(['Scope another project','View full summary']);
+      document.querySelectorAll('.project-btn').forEach(b=>b.classList.remove('active'));
     });
   });
 }
 
-// ─── Input handler ─────────────────────────────────────────────────────────────
 function handleUserInput() {
   const input = document.getElementById('userInput');
   const val = input.value.trim();
   if (!val) return;
   input.value = '';
-
-  // If no project active
-  if (!state.project || state.step >= (PROJECTS[state.project]?.steps.length || 0)) {
+  if (!state.project || state.step>=(PROJECTS[state.project]?.steps.length||0)) {
     clearQR();
     const lower = val.toLowerCase();
-    if (lower.includes('another') || lower.includes('scope') || lower.includes('new')) {
-      addMsg(val, 'user');
-      botSay('Sure! Select a project from the left sidebar to get started.', 300);
-    } else if (lower.includes('done') || lower.includes('summary') || lower.includes('full')) {
-      addMsg(val, 'user');
-      showFullSummary();
+    if (lower.includes('another')||lower.includes('scope')||lower.includes('new')) {
+      addMsg(val,'user');
+      botSay('Select a project from the left panel to begin.', 300);
+    } else if (lower.includes('summary')||lower.includes('done')||lower.includes('full')) {
+      addMsg(val,'user'); showFullSummary();
     } else {
-      addMsg(val, 'user');
-      botSay('Select a project from the left sidebar to begin scoping, or type <strong>summary</strong> to see the full breakdown.', 300);
+      addMsg(val,'user');
+      botSay('Select a project from the left panel to begin, or type <strong>summary</strong> to see all results.', 300);
     }
     return;
   }
-
-  clearQR();
-  processAnswer(val);
+  clearQR(); processAnswer(val);
 }
 
 function showFullSummary() {
   const keys = Object.keys(state.sessionResults);
-  if (keys.length === 0) {
-    botSay('No projects have been scoped yet. Select a project from the sidebar to get started.');
-    return;
-  }
-  let rows = keys.map(k => {
-    const p = PROJECTS[k];
-    const r = state.sessionResults[k];
-    return `<div class="rc-row"><span>${p.icon} ${p.name}</span><span class="rc-val">${fmtHrs(r.hrs)} hrs — €${fmt(r.cost)}</span></div>`;
+  if (!keys.length) { botSay('No projects scoped yet. Select a project from the left panel to get started.'); return; }
+  const rows = keys.map(k=>{
+    const p=PROJECTS[k]; const r=state.sessionResults[k];
+    return `<div class="rc-row"><span class="rc-label">${p.icon} ${p.name}</span><span class="rc-val">${fmtHrs(r.hrs)} hrs — €${fmt(r.cost)}</span></div>`;
   }).join('');
-  const totalHrs = round(keys.reduce((s,k) => s + state.sessionResults[k].hrs, 0));
-  const totalCost = keys.reduce((s,k) => s + state.sessionResults[k].cost, 0);
-
+  const tH = round(keys.reduce((s,k)=>s+state.sessionResults[k].hrs,0));
+  const tC = keys.reduce((s,k)=>s+state.sessionResults[k].cost,0);
   botSay(`
-    📋 <strong>Full Pre-Sales Summary</strong>
+    <strong>📋 Full Pre-Sales Summary</strong>
     <div class="result-card">
       ${rows}
-      <div class="rc-row big"><span>Grand Total</span><span class="rc-val">${fmtHrs(totalHrs)} hrs — €${fmt(totalCost)}</span></div>
+      <div class="rc-row big"><span class="rc-label">Grand Total</span><span class="rc-val">${fmtHrs(tH)} hrs — €${fmt(tC)}</span></div>
     </div>
-    <br><span style="color:var(--text-muted);font-size:11px">Rate: €${RATE}/hr · PM fee applied per project where selected</span>
+    <span style="color:var(--text-muted);font-size:11px">Rate: €${RATE}/hr · PM fee applied per project where selected</span>
   `, 500);
 }
 
-// ─── Enter key ────────────────────────────────────────────────────────────────
-document.getElementById('userInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') { e.preventDefault(); handleUserInput(); }
+document.getElementById('userInput').addEventListener('keydown', e=>{
+  if (e.key==='Enter') { e.preventDefault(); handleUserInput(); }
 });
 
-// ─── Init ─────────────────────────────────────────────────────────────────────
-(async () => {
-  await delay(300);
-  await botSay(`👋 Welcome to the <strong>Lantech Pre-Sales Labour Calculator</strong>.<br><br>I can estimate labour hours and costs for the following project types:<br><br>
+(async()=>{
+  await delay(200);
+  await botSay(`👋 Welcome to the <strong>Lantech Pre-Sales Labour Calculator</strong>.<br><br>Select a project type from the left panel to begin scoping. I'll guide you through the relevant questions and calculate the labour hours and cost automatically.<br><br>
     <span class="tag">☁️ Cloud Migration</span>
     <span class="tag">🖥️ Server Upgrade</span>
     <span class="tag">🌐 Network Upgrade</span>
@@ -1065,7 +1037,7 @@ document.getElementById('userInput').addEventListener('keydown', e => {
     <span class="tag">📱 MDM / MAM</span>
     <span class="tag">🖱️ AVD</span>
     <span class="tag">♻️ Recycling</span>
-    <br><br>Select a project from the <strong>left sidebar</strong> to begin scoping.`, 200);
+  `, 150);
 })();
 </script>
 </body>
