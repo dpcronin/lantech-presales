@@ -21,14 +21,11 @@
     --text-dim: #8fa3b5;
     --accent-green: #00a86b;
     --accent-orange: #f07c00;
-    --user-bg: #0075BF;
     --radius: 10px;
     --shadow: 0 2px 12px rgba(0,117,191,0.08);
     --shadow-lg: 0 8px 32px rgba(0,117,191,0.12);
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     background: var(--bg);
     color: var(--text);
@@ -38,8 +35,6 @@
     flex-direction: column;
     overflow: hidden;
   }
-
-  /* ── Header ── */
   header {
     background: var(--surface);
     border-bottom: 1px solid var(--border);
@@ -58,406 +53,163 @@
     width: 100%; height: 3px;
     background: var(--brand);
   }
-
-  .logo-area {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .logo-mark img {
-    height: 40px;
-    width: auto;
-    display: block;
-  }
-
-  .header-divider {
-    width: 1px;
-    height: 28px;
-    background: var(--border);
-    margin: 0 20px;
-  }
-
+  .logo-area { display: flex; align-items: center; gap: 14px; }
+  .logo-mark img { height: 40px; width: auto; display: block; }
+  .header-divider { width: 1px; height: 28px; background: var(--border); margin: 0 20px; }
   .header-title {
     font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    color: var(--brand);
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    font-weight: 600; font-size: 16px; color: var(--brand);
+    letter-spacing: 0.5px; text-transform: uppercase;
   }
-
   .header-badge {
     margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    background: var(--brand-light);
-    border: 1px solid var(--brand-mid);
-    border-radius: 20px;
-    padding: 5px 12px;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--brand);
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
+    display: flex; align-items: center; gap: 7px;
+    background: var(--brand-light); border: 1px solid var(--brand-mid);
+    border-radius: 20px; padding: 5px 12px;
+    font-size: 11px; font-weight: 600; color: var(--brand);
+    letter-spacing: 0.3px; text-transform: uppercase;
   }
   .status-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--accent-green);
-    animation: pulse 2.5s infinite;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent-green); animation: pulse 2.5s infinite;
   }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-  /* ── Layout ── */
-  .main {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-  }
+  .main { display: flex; flex: 1; overflow: hidden; }
 
-  /* ── Sidebar ── */
   .sidebar {
-    width: 230px;
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    padding: 20px 14px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    overflow-y: auto;
+    width: 230px; background: var(--surface); border-right: 1px solid var(--border);
+    padding: 20px 14px; flex-shrink: 0;
+    display: flex; flex-direction: column; gap: 4px; overflow-y: auto;
   }
   .sidebar-label {
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    font-weight: 600;
-    margin-bottom: 8px;
-    padding-left: 8px;
+    font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--text-muted); font-weight: 600; margin-bottom: 8px; padding-left: 8px;
   }
-
   .project-btn {
-    background: transparent;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    padding: 9px 12px;
-    cursor: pointer;
-    text-align: left;
-    color: var(--text-muted);
-    font-family: 'Barlow', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    width: 100%;
+    background: transparent; border: 1px solid transparent; border-radius: 8px;
+    padding: 9px 12px; cursor: pointer; text-align: left;
+    color: var(--text-muted); font-family: 'Barlow', sans-serif;
+    font-size: 13px; font-weight: 500; transition: all 0.15s;
+    display: flex; align-items: center; gap: 9px; width: 100%;
   }
-  .project-btn:hover {
-    background: var(--brand-light);
-    color: var(--brand);
-    border-color: var(--brand-mid);
-  }
-  .project-btn.active {
-    background: var(--brand);
-    color: white;
-    border-color: var(--brand);
-    box-shadow: 0 2px 8px rgba(0,117,191,0.25);
-  }
+  .project-btn:hover { background: var(--brand-light); color: var(--brand); border-color: var(--brand-mid); }
+  .project-btn.active { background: var(--brand); color: white; border-color: var(--brand); box-shadow: 0 2px 8px rgba(0,117,191,0.25); }
   .project-btn .p-icon { font-size: 15px; flex-shrink: 0; }
   .project-btn .p-name { flex: 1; }
   .project-btn .p-check {
-    width: 18px; height: 18px;
-    border-radius: 50%;
-    background: var(--accent-green);
-    color: white;
-    font-size: 10px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+    width: 18px; height: 18px; border-radius: 50%; background: var(--accent-green);
+    color: white; font-size: 10px; display: none; align-items: center; justify-content: center; flex-shrink: 0;
   }
   .project-btn.done .p-check { display: flex; }
   .project-btn.active .p-check { background: rgba(255,255,255,0.3); }
-
-  .sidebar-divider {
-    height: 1px;
-    background: var(--border);
-    margin: 12px 0;
-  }
-
-  .summary-box {
-    background: var(--brand);
-    border-radius: 10px;
-    padding: 14px;
-    margin-top: auto;
-    color: white;
-  }
+  .sidebar-divider { height: 1px; background: var(--border); margin: 12px 0; }
+  .summary-box { background: var(--brand); border-radius: 10px; padding: 14px; margin-top: auto; color: white; }
   .summary-box h3 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 10px;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.7; margin-bottom: 10px;
   }
-  .summary-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    margin-bottom: 4px;
-    opacity: 0.85;
-  }
+  .summary-row { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; opacity: 0.85; }
   .summary-row.total {
-    border-top: 1px solid rgba(255,255,255,0.2);
-    padding-top: 8px;
-    margin-top: 6px;
-    font-size: 13px;
-    font-weight: 700;
-    opacity: 1;
+    border-top: 1px solid rgba(255,255,255,0.2); padding-top: 8px; margin-top: 6px;
+    font-size: 13px; font-weight: 700; opacity: 1;
   }
   .summary-val { font-weight: 600; }
 
-  /* ── Chat area ── */
-  .chat-area {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background: var(--bg);
-  }
-
+  .chat-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--bg); }
   .messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 28px 32px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    scroll-behavior: smooth;
+    flex: 1; overflow-y: auto; padding: 28px 32px 16px;
+    display: flex; flex-direction: column; gap: 14px; scroll-behavior: smooth;
   }
   .messages::-webkit-scrollbar { width: 4px; }
   .messages::-webkit-scrollbar-track { background: transparent; }
   .messages::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
 
-  .msg {
-    display: flex;
-    gap: 11px;
-    animation: fadeUp 0.25s ease;
-    max-width: 800px;
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .msg { display: flex; gap: 11px; animation: fadeUp 0.25s ease; max-width: 800px; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
   .msg.user { flex-direction: row-reverse; align-self: flex-end; }
   .msg.bot { align-self: flex-start; }
 
   .avatar {
-    width: 34px; height: 34px;
-    border-radius: 8px;
-    flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 15px;
-    font-weight: 700;
+    width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700;
   }
   .avatar.bot-av {
-    background: var(--brand);
-    color: white;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.5px;
+    background: var(--brand); color: white;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 0.5px;
   }
-  .avatar.user-av {
-    background: var(--brand-light);
-    border: 1px solid var(--brand-mid);
-    color: var(--brand);
-  }
+  .avatar.user-av { background: var(--brand-light); border: 1px solid var(--brand-mid); color: var(--brand); }
 
-  .bubble {
-    padding: 12px 16px;
-    border-radius: var(--radius);
-    font-size: 14px;
-    line-height: 1.6;
-    max-width: 620px;
-  }
+  .bubble { padding: 12px 16px; border-radius: var(--radius); font-size: 14px; line-height: 1.6; max-width: 620px; }
   .msg.bot .bubble {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--surface); border: 1px solid var(--border);
     border-radius: 4px var(--radius) var(--radius) var(--radius);
-    color: var(--text);
-    box-shadow: var(--shadow);
+    color: var(--text); box-shadow: var(--shadow);
   }
   .msg.user .bubble {
-    background: var(--brand);
-    border: 1px solid var(--brand-dark);
-    border-radius: var(--radius) 4px var(--radius) var(--radius);
-    color: white;
+    background: var(--brand); border: 1px solid var(--brand-dark);
+    border-radius: var(--radius) 4px var(--radius) var(--radius); color: white;
   }
-
   .bubble strong { color: var(--brand); font-weight: 600; }
   .msg.user .bubble strong { color: rgba(255,255,255,0.9); }
-
   .bubble .tag {
-    display: inline-block;
-    background: var(--brand-light);
-    border: 1px solid var(--brand-mid);
-    color: var(--brand);
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 9px;
-    border-radius: 4px;
-    margin: 2px 2px;
-    letter-spacing: 0.3px;
+    display: inline-block; background: var(--brand-light); border: 1px solid var(--brand-mid);
+    color: var(--brand); font-size: 11px; font-weight: 600; padding: 3px 9px;
+    border-radius: 4px; margin: 2px 2px; letter-spacing: 0.3px;
   }
-
   .result-card {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 14px;
-    margin-top: 12px;
-    border-left: 3px solid var(--brand);
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px; margin-top: 12px; border-left: 3px solid var(--brand);
   }
-  .rc-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    margin-bottom: 5px;
-    color: var(--text-muted);
-    gap: 16px;
-  }
+  .rc-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; color: var(--text-muted); gap: 16px; }
   .rc-row .rc-label { flex: 1; }
   .rc-row .rc-val { color: var(--text); font-weight: 600; white-space: nowrap; }
-  .rc-row.big {
-    font-size: 15px;
-    color: var(--text);
-    font-weight: 700;
-    border-top: 1px solid var(--border);
-    padding-top: 10px;
-    margin-top: 8px;
-  }
+  .rc-row.big { font-size: 15px; color: var(--text); font-weight: 700; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 8px; }
   .rc-row.big .rc-val { color: var(--brand); font-size: 16px; }
 
-  /* Quick replies */
-  .quick-replies {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 12px;
-  }
+  .quick-replies { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
   .qr-btn {
-    background: var(--surface);
-    border: 1.5px solid var(--brand-mid);
-    border-radius: 6px;
-    padding: 7px 16px;
-    font-family: 'Barlow', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--brand);
-    cursor: pointer;
-    transition: all 0.15s;
-    letter-spacing: 0.2px;
+    background: var(--surface); border: 1.5px solid var(--brand-mid); border-radius: 6px;
+    padding: 7px 16px; font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 600;
+    color: var(--brand); cursor: pointer; transition: all 0.15s; letter-spacing: 0.2px;
   }
-  .qr-btn:hover {
-    background: var(--brand);
-    border-color: var(--brand);
-    color: white;
-    box-shadow: 0 2px 8px rgba(0,117,191,0.2);
-  }
+  .qr-btn:hover { background: var(--brand); border-color: var(--brand); color: white; box-shadow: 0 2px 8px rgba(0,117,191,0.2); }
 
-  /* Input area */
   .input-area {
-    padding: 14px 32px 18px;
-    border-top: 1px solid var(--border);
-    background: var(--surface);
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-shrink: 0;
+    padding: 14px 32px 18px; border-top: 1px solid var(--border); background: var(--surface);
+    display: flex; gap: 10px; align-items: center; flex-shrink: 0;
     box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
   }
   .input-wrap {
-    flex: 1;
-    background: var(--bg);
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    padding: 10px 14px;
-    gap: 8px;
+    flex: 1; background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px;
+    display: flex; align-items: center; padding: 10px 14px; gap: 8px;
     transition: border-color 0.2s, box-shadow 0.2s;
   }
-  .input-wrap:focus-within {
-    border-color: var(--brand);
-    box-shadow: 0 0 0 3px rgba(0,117,191,0.08);
-  }
+  .input-wrap:focus-within { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(0,117,191,0.08); }
   #userInput {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--text);
-    font-family: 'Barlow', sans-serif;
-    font-size: 14px;
+    flex: 1; background: transparent; border: none; outline: none;
+    color: var(--text); font-family: 'Barlow', sans-serif; font-size: 14px;
   }
   #userInput::placeholder { color: var(--text-dim); }
-
   .send-btn {
-    background: var(--brand);
-    border: none;
-    border-radius: 8px;
-    width: 42px; height: 42px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: background 0.15s, box-shadow 0.15s;
-    color: white;
-    font-size: 17px;
+    background: var(--brand); border: none; border-radius: 8px; width: 42px; height: 42px;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
+    transition: background 0.15s, box-shadow 0.15s; color: white; font-size: 17px;
     box-shadow: 0 2px 8px rgba(0,117,191,0.25);
   }
-  .send-btn:hover {
-    background: var(--brand-dark);
-    box-shadow: 0 4px 12px rgba(0,117,191,0.35);
-  }
+  .send-btn:hover { background: var(--brand-dark); box-shadow: 0 4px 12px rgba(0,117,191,0.35); }
 
-  /* Typing indicator */
-  .typing-indicator {
-    display: flex; gap: 4px; align-items: center; padding: 4px 0;
-  }
+  .typing-indicator { display: flex; gap: 4px; align-items: center; padding: 4px 0; }
   .typing-indicator span {
-    width: 7px; height: 7px;
-    background: var(--brand-mid);
-    border-radius: 50%;
+    width: 7px; height: 7px; background: var(--brand-mid); border-radius: 50%;
     animation: typing 1.2s infinite;
   }
   .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
   .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes typing {
-    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-    30% { transform: translateY(-5px); opacity: 1; }
-  }
+  @keyframes typing { 0%,60%,100%{transform:translateY(0);opacity:0.4} 30%{transform:translateY(-5px);opacity:1} }
 
-  /* Progress bar */
-  .progress-bar-wrap {
-    background: var(--border);
-    border-radius: 4px;
-    height: 4px;
-    margin-top: 10px;
-    overflow: hidden;
-  }
-  .progress-bar-fill {
-    background: var(--brand);
-    height: 100%;
-    border-radius: 4px;
-    transition: width 0.4s ease;
-  }
+  .progress-bar-wrap { background: var(--border); border-radius: 4px; height: 4px; margin-top: 10px; overflow: hidden; }
+  .progress-bar-fill { background: var(--brand); height: 100%; border-radius: 4px; transition: width 0.4s ease; }
 </style>
 </head>
 <body>
@@ -477,51 +229,37 @@
 <div class="main">
   <div class="sidebar">
     <div class="sidebar-label">Project Types</div>
-
     <button class="project-btn" id="btn-cloud" onclick="startProject('cloud')">
-      <span class="p-icon">☁️</span>
-      <span class="p-name">Cloud Migration</span>
-      <span class="p-check">✓</span>
+      <span class="p-icon">☁️</span><span class="p-name">Cloud Migration</span><span class="p-check">✓</span>
     </button>
     <button class="project-btn" id="btn-server" onclick="startProject('server')">
-      <span class="p-icon">🖥️</span>
-      <span class="p-name">Server Upgrade</span>
-      <span class="p-check">✓</span>
+      <span class="p-icon">🖥️</span><span class="p-name">Server Upgrade</span><span class="p-check">✓</span>
     </button>
     <button class="project-btn" id="btn-network" onclick="startProject('network')">
-      <span class="p-icon">🌐</span>
-      <span class="p-name">Network Upgrade</span>
-      <span class="p-check">✓</span>
+      <span class="p-icon">🌐</span><span class="p-name">Network Upgrade</span><span class="p-check">✓</span>
     </button>
     <button class="project-btn" id="btn-smtp" onclick="startProject('smtp')">
-      <span class="p-icon">📧</span>
-      <span class="p-name">SMTP Secure Send</span>
-      <span class="p-check">✓</span>
+      <span class="p-icon">📧</span><span class="p-name">SMTP Secure Send</span><span class="p-check">✓</span>
     </button>
     <button class="project-btn" id="btn-mdm" onclick="startProject('mdm')">
-      <span class="p-icon">📱</span>
-      <span class="p-name">MDM / MAM</span>
-      <span class="p-check">✓</span>
+      <span class="p-icon">📱</span><span class="p-name">MDM / MAM</span><span class="p-check">✓</span>
     </button>
     <button class="project-btn" id="btn-avd" onclick="startProject('avd')">
-      <span class="p-icon">🖱️</span>
-      <span class="p-name">AVD</span>
-      <span class="p-check">✓</span>
+      <span class="p-icon">🖱️</span><span class="p-name">AVD</span><span class="p-check">✓</span>
+    </button>
+    <button class="project-btn" id="btn-bvoip" onclick="startProject('bvoip')">
+      <span class="p-icon">📞</span><span class="p-name">BVOIP Phone System</span><span class="p-check">✓</span>
     </button>
     <button class="project-btn" id="btn-recycle" onclick="startProject('recycle')">
-      <span class="p-icon">♻️</span>
-      <span class="p-name">Recycling</span>
-      <span class="p-check">✓</span>
+      <span class="p-icon">♻️</span><span class="p-name">Recycling</span><span class="p-check">✓</span>
     </button>
-
     <div class="sidebar-divider"></div>
-
     <div class="summary-box">
       <h3>Session Summary</h3>
       <div id="summaryRows"></div>
       <div class="summary-row total">
         <span>Total</span>
-        <span class="summary-val" id="summaryTotal">0 hrs / €0</span>
+        <span class="summary-val" id="summaryTotal">0 hrs / €0.00</span>
       </div>
     </div>
   </div>
@@ -539,10 +277,9 @@
 
 <script>
 const RATE = 150;
-
+const RATE_BVOIP = 130;
 let state = { project: null, step: 0, answers: {}, sessionResults: {} };
 
-// ── Projects ────────────────────────────────────────────────────────────────
 const PROJECTS = {
   cloud: {
     name: 'Cloud Migration', icon: '☁️',
@@ -560,20 +297,16 @@ const PROJECTS = {
       { key: 'pm_fee',      q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
     ],
     calc: (a) => {
-      let h = 0;
-      h += (parseFloat(a.data_gb)||0) * 0.01;
-      h += (parseFloat(a.workstations)||0) * 0.35;
+      let h = (parseFloat(a.data_gb)||0)*0.01 + (parseFloat(a.workstations)||0)*0.35;
       if (a.intune==='yes') h += 3.75;
-      h += (parseFloat(a.teams)||0) * 0.25;
-      h += (parseFloat(a.new_users)||0) * 0.2;
-      h += (parseFloat(a.mailboxes)||0) * 0.35;
+      h += (parseFloat(a.teams)||0)*0.25 + (parseFloat(a.new_users)||0)*0.2 + (parseFloat(a.mailboxes)||0)*0.35;
       if (a.saas_backup==='yes') h += 1;
       if (a.dhcp_dns==='yes') h += 1.5;
       if (a.disable_aad==='yes') h += 0.5;
       if (a.jumpbox==='yes') h += 1;
       h += 1;
-      let c = h * RATE; if (a.pm_fee==='yes') c *= 1.2;
-      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes' };
+      let c = h*RATE; if (a.pm_fee==='yes') c *= 1.2;
+      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes', rate: RATE };
     },
     breakdown: (a) => {
       let r = [];
@@ -613,26 +346,14 @@ const PROJECTS = {
       { key: 'pm_fee',           q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
     ],
     calc: (a) => {
-      let h = 0;
-      h += (parseFloat(a.physical_install)||0)*1;
-      h += (parseFloat(a.raid_os)||0)*3;
-      h += (parseFloat(a.hyperv)||0)*1;
-      h += (parseFloat(a.dc_promo)||0)*2;
-      h += (parseFloat(a.dc_demotion)||0)*2;
-      h += (parseFloat(a.vms)||0)*1;
-      if (a.extra_cpu==='yes') h += 0.5;
-      if (a.extra_ram==='yes') h += 0.25;
-      if (a.ilo==='yes') h += 0.5;
-      if (a.fsmo==='yes') h += 0.5;
-      if (a.psu2==='yes') h += 0.25;
-      if (a.dhcp_dns_roles==='yes') h += 1;
+      let h = (parseFloat(a.physical_install)||0)*1 + (parseFloat(a.raid_os)||0)*3 + (parseFloat(a.hyperv)||0)*1 + (parseFloat(a.dc_promo)||0)*2 + (parseFloat(a.dc_demotion)||0)*2 + (parseFloat(a.vms)||0)*1;
+      if (a.extra_cpu==='yes') h += 0.5; if (a.extra_ram==='yes') h += 0.25; if (a.ilo==='yes') h += 0.5;
+      if (a.fsmo==='yes') h += 0.5; if (a.psu2==='yes') h += 0.25; if (a.dhcp_dns_roles==='yes') h += 1;
       h += (parseFloat(a.data_gb)||0)*0.01;
-      if (a.cals==='yes') h += 0.25;
-      if (a.backups==='yes') h += 0.5;
-      if (a.third_party==='yes') h += 1;
+      if (a.cals==='yes') h += 0.25; if (a.backups==='yes') h += 0.5; if (a.third_party==='yes') h += 1;
       h += 1;
       let c = h*RATE; if (a.pm_fee==='yes') c *= 1.2;
-      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes' };
+      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes', rate: RATE };
     },
     breakdown: (a) => {
       let r = [];
@@ -679,20 +400,17 @@ const PROJECTS = {
       { key: 'pm_fee',      q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
     ],
     calc: (a) => {
-      let h = 0;
-      h += (parseFloat(a.sw48_poe)||0)*4; h += (parseFloat(a.sw24_poe)||0)*2.75; h += (parseFloat(a.sw10_poe)||0)*2;
-      h += (parseFloat(a.sw48)||0)*4; h += (parseFloat(a.sw24)||0)*2.75; h += (parseFloat(a.sw10)||0)*2;
+      let h = (parseFloat(a.sw48_poe)||0)*4 + (parseFloat(a.sw24_poe)||0)*2.75 + (parseFloat(a.sw10_poe)||0)*2;
+      h += (parseFloat(a.sw48)||0)*4 + (parseFloat(a.sw24)||0)*2.75 + (parseFloat(a.sw10)||0)*2;
       const v = parseFloat(a.vlans)||0; if (v>5) h += (v-5)*0.25;
-      h += (parseFloat(a.cable_mgmt)||0)*0.25;
-      h += (parseFloat(a.eth_cables)||0)*0.25;
-      h += (parseFloat(a.iec_pdu)||0)*0.5; h += (parseFloat(a.uk_pdu)||0)*0.5;
-      h += (parseFloat(a.shelves)||0)*0.2;
+      h += (parseFloat(a.cable_mgmt)||0)*0.25 + (parseFloat(a.eth_cables)||0)*0.25;
+      h += (parseFloat(a.iec_pdu)||0)*0.5 + (parseFloat(a.uk_pdu)||0)*0.5 + (parseFloat(a.shelves)||0)*0.2;
       if (a.flood_mon==='yes') h += 0.5; if (a.temp_mon==='yes') h += 0.5;
-      h += (parseFloat(a.rack_ups)||0)*2; h += (parseFloat(a.standalone_ups)||0)*1.5;
+      h += (parseFloat(a.rack_ups)||0)*2 + (parseFloat(a.standalone_ups)||0)*1.5;
       if (a.third_party==='yes') h += 1;
       h += 1;
       let c = h*RATE; if (a.pm_fee==='yes') c *= 1.2;
-      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes' };
+      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes', rate: RATE };
     },
     breakdown: (a) => {
       let r = [];
@@ -728,7 +446,7 @@ const PROJECTS = {
     calc: (a) => {
       let h = (parseFloat(a.smtp_client)||0)*0.25 + (parseFloat(a.printers)||0)*0.25 + (parseFloat(a.uri_ports)||0)*1;
       let c = h*RATE; if (a.pm_fee==='yes') c *= 1.2;
-      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes' };
+      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes', rate: RATE };
     },
     breakdown: (a) => {
       let r = [];
@@ -757,7 +475,7 @@ const PROJECTS = {
       if (a.onsite==='yes') h += 7.5;
       h += 1;
       let c = h*RATE; if (a.pm_fee==='yes') c *= 1.2;
-      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes' };
+      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes', rate: RATE };
     },
     breakdown: (a) => {
       let r = [];
@@ -774,14 +492,14 @@ const PROJECTS = {
   avd: {
     name: 'Azure Virtual Desktop', icon: '🖱️',
     steps: [
-      { key: 'licenses',        q: 'How many <strong>AVD licences</strong> need to be applied?', type: 'number', hint: 'e.g. 0' },
-      { key: 'dc_build',        q: 'Is a <strong>Domain Controller build</strong> in Azure required?', type: 'yesno' },
-      { key: 'azure_files',     q: 'How many <strong>Azure Files shares</strong> need to be built? (includes GPOs, FSLogix, Scaling)', type: 'number', hint: 'e.g. 1' },
-      { key: 'pool_servers',    q: 'How many <strong>Pool Servers</strong> need to be built?', type: 'number', hint: 'e.g. 1' },
-      { key: 'app_servers',     q: 'How many <strong>Application Servers</strong> need to be built?', type: 'number', hint: 'e.g. 0' },
-      { key: 'vendor_apps',     q: 'How many servers require <strong>Vendor Application Management</strong>?', type: 'number', hint: 'e.g. 0' },
-      { key: 'end_user_devices',q: 'How many <strong>end-user devices</strong> need to be configured?', type: 'number', hint: 'e.g. 0' },
-      { key: 'pm_fee',          q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
+      { key: 'licenses',         q: 'How many <strong>AVD licences</strong> need to be applied?', type: 'number', hint: 'e.g. 0' },
+      { key: 'dc_build',         q: 'Is a <strong>Domain Controller build</strong> in Azure required?', type: 'yesno' },
+      { key: 'azure_files',      q: 'How many <strong>Azure Files shares</strong> need to be built? (includes GPOs, FSLogix, Scaling)', type: 'number', hint: 'e.g. 1' },
+      { key: 'pool_servers',     q: 'How many <strong>Pool Servers</strong> need to be built?', type: 'number', hint: 'e.g. 1' },
+      { key: 'app_servers',      q: 'How many <strong>Application Servers</strong> need to be built?', type: 'number', hint: 'e.g. 0' },
+      { key: 'vendor_apps',      q: 'How many servers require <strong>Vendor Application Management</strong>?', type: 'number', hint: 'e.g. 0' },
+      { key: 'end_user_devices', q: 'How many <strong>end-user devices</strong> need to be configured?', type: 'number', hint: 'e.g. 0' },
+      { key: 'pm_fee',           q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
     ],
     calc: (a) => {
       let h = (parseFloat(a.licenses)||0)*0.1;
@@ -789,7 +507,7 @@ const PROJECTS = {
       h += (parseFloat(a.azure_files)||0)*3.75 + (parseFloat(a.pool_servers)||0)*2 + (parseFloat(a.app_servers)||0)*2 + (parseFloat(a.vendor_apps)||0)*2 + (parseFloat(a.end_user_devices)||0)*0.25;
       h += 1;
       let c = h*RATE; if (a.pm_fee==='yes') c *= 1.2;
-      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes' };
+      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes', rate: RATE };
     },
     breakdown: (a) => {
       let r = [];
@@ -800,6 +518,50 @@ const PROJECTS = {
       if ((parseFloat(a.app_servers)||0)>0) r.push([`Application Servers (×${a.app_servers})`, round((parseFloat(a.app_servers)||0)*2)]);
       if ((parseFloat(a.vendor_apps)||0)>0) r.push([`Vendor App Management (×${a.vendor_apps})`, round((parseFloat(a.vendor_apps)||0)*2)]);
       if ((parseFloat(a.end_user_devices)||0)>0) r.push([`End User Device Config (×${a.end_user_devices})`, round((parseFloat(a.end_user_devices)||0)*0.25)]);
+      r.push(['Documentation', 1]);
+      return r;
+    }
+  },
+  bvoip: {
+    name: 'BVOIP Phone System', icon: '📞',
+    steps: [
+      { key: 'extensions',    q: 'How many <strong>extensions</strong> need to be configured?', type: 'number', hint: 'e.g. 10' },
+      { key: 'instance',      q: 'Is a new <strong>BVOIP instance setup</strong> required?', type: 'yesno' },
+      { key: 'ivrs',          q: 'How many <strong>IVRs</strong> need to be created?', type: 'number', hint: 'e.g. 0' },
+      { key: 'ring_groups',   q: 'How many <strong>ring groups / hunt groups</strong> need to be configured?', type: 'number', hint: 'e.g. 0' },
+      { key: 'call_queues',   q: 'How many <strong>call queues</strong> need to be set up?', type: 'number', hint: 'e.g. 0' },
+      { key: 'voicemails',    q: 'How many <strong>voicemail boxes</strong> need to be configured?', type: 'number', hint: 'e.g. 0' },
+      { key: 'auto_attendants',q: 'How many <strong>auto attendants</strong> need to be set up?', type: 'number', hint: 'e.g. 0' },
+      { key: 'dids',          q: 'How many <strong>inbound numbers (DIDs)</strong> need to be ported?', type: 'number', hint: 'e.g. 0' },
+      { key: 'handsets',      q: 'How many <strong>physical handsets</strong> need to be provisioned?', type: 'number', hint: 'e.g. 0' },
+      { key: 'call_flows',    q: 'How many <strong>call flows / time conditions</strong> need to be configured?', type: 'number', hint: 'e.g. 0' },
+      { key: 'training',      q: 'How many <strong>user / admin training sessions</strong> are required?', type: 'number', hint: 'e.g. 0' },
+      { key: 'onsite',        q: 'Is <strong>onsite assistance</strong> required?', type: 'yesno' },
+      { key: 'pm_fee',        q: 'Should a <strong>Project Management fee</strong> (20%) be included?', type: 'yesno' },
+    ],
+    calc: (a) => {
+      let h = (parseFloat(a.extensions)||0)*0.1667;
+      if (a.instance==='yes') h += 2;
+      h += (parseFloat(a.ivrs)||0)*0.5 + (parseFloat(a.ring_groups)||0)*0.25 + (parseFloat(a.call_queues)||0)*0.25 + (parseFloat(a.voicemails)||0)*0.1 + (parseFloat(a.auto_attendants)||0)*0.5 + (parseFloat(a.dids)||0)*0.25 + (parseFloat(a.handsets)||0)*0.25 + (parseFloat(a.call_flows)||0)*0.25 + (parseFloat(a.training)||0)*1;
+      if (a.onsite==='yes') h += 7.5;
+      h += 1;
+      let c = h*RATE_BVOIP; if (a.pm_fee==='yes') c *= 1.2;
+      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes', rate: RATE_BVOIP };
+    },
+    breakdown: (a) => {
+      let r = [];
+      if ((parseFloat(a.extensions)||0)>0) r.push([`Extensions (×${a.extensions})`, round((parseFloat(a.extensions)||0)*0.1667)]);
+      if (a.instance==='yes') r.push(['BVOIP Instance Setup', 2]);
+      if ((parseFloat(a.ivrs)||0)>0) r.push([`IVRs (×${a.ivrs})`, round((parseFloat(a.ivrs)||0)*0.5)]);
+      if ((parseFloat(a.ring_groups)||0)>0) r.push([`Ring / Hunt Groups (×${a.ring_groups})`, round((parseFloat(a.ring_groups)||0)*0.25)]);
+      if ((parseFloat(a.call_queues)||0)>0) r.push([`Call Queues (×${a.call_queues})`, round((parseFloat(a.call_queues)||0)*0.25)]);
+      if ((parseFloat(a.voicemails)||0)>0) r.push([`Voicemail Boxes (×${a.voicemails})`, round((parseFloat(a.voicemails)||0)*0.1)]);
+      if ((parseFloat(a.auto_attendants)||0)>0) r.push([`Auto Attendants (×${a.auto_attendants})`, round((parseFloat(a.auto_attendants)||0)*0.5)]);
+      if ((parseFloat(a.dids)||0)>0) r.push([`DID Number Ports (×${a.dids})`, round((parseFloat(a.dids)||0)*0.25)]);
+      if ((parseFloat(a.handsets)||0)>0) r.push([`Handset Provisioning (×${a.handsets})`, round((parseFloat(a.handsets)||0)*0.25)]);
+      if ((parseFloat(a.call_flows)||0)>0) r.push([`Call Flows / Time Conditions (×${a.call_flows})`, round((parseFloat(a.call_flows)||0)*0.25)]);
+      if ((parseFloat(a.training)||0)>0) r.push([`Training Sessions (×${a.training})`, round((parseFloat(a.training)||0)*1)]);
+      if (a.onsite==='yes') r.push(['Onsite Assistance', 7.5]);
       r.push(['Documentation', 1]);
       return r;
     }
@@ -820,7 +582,7 @@ const PROJECTS = {
     calc: (a) => {
       let h = (parseFloat(a.servers)||0)*0.2 + (parseFloat(a.pcs)||0)*0.1 + (parseFloat(a.storage)||0)*0.2 + (parseFloat(a.network_eq)||0)*0.2 + (parseFloat(a.ups)||0)*0.25 + (parseFloat(a.ups_batteries)||0)*0.2 + (parseFloat(a.cert_disks)||0)*0.1 + (parseFloat(a.uncert_disks)||0)*0.1;
       let c = h*RATE; if (a.pm_fee==='yes') c *= 1.2;
-      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes' };
+      return { hrs: round(h), cost: round(c), pm: a.pm_fee==='yes', rate: RATE };
     },
     breakdown: (a) => {
       let r = [];
@@ -837,7 +599,6 @@ const PROJECTS = {
   }
 };
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
 function round(n) { return Math.round(n*100)/100; }
 function fmt(n) { return n.toLocaleString('en-IE', {minimumFractionDigits:2, maximumFractionDigits:2}); }
 function fmtHrs(n) { return n%1===0 ? n.toString() : n.toFixed(2); }
@@ -854,8 +615,7 @@ function addMsg(html, role='bot') {
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
   bubble.innerHTML = html;
-  if (role==='bot') { div.appendChild(av); div.appendChild(bubble); }
-  else { div.appendChild(av); div.appendChild(bubble); }
+  div.appendChild(av); div.appendChild(bubble);
   msgs.appendChild(div);
   scrollBottom();
   return bubble;
@@ -915,7 +675,8 @@ function startProject(key) {
   state.project = key; state.step = 0; state.answers = {};
   const p = PROJECTS[key];
   addMsg(`<strong>${p.icon} ${p.name}</strong>`, 'user');
-  botSay(`Let's scope a <strong>${p.name}</strong> project. I'll ask you ${p.steps.length} quick questions to calculate the required labour hours.<br><br>Answer with a number, or use the <strong>Yes / No</strong> buttons where shown.`, 350).then(askStep);
+  const rateNote = p === PROJECTS.bvoip ? ` at <strong>€${RATE_BVOIP}/hr</strong>` : '';
+  botSay(`Let's scope a <strong>${p.name}</strong> project${rateNote}. I'll ask you ${p.steps.length} quick questions to calculate the required labour hours.<br><br>Answer with a number, or use the <strong>Yes / No</strong> buttons where shown.`, 350).then(askStep);
 }
 
 function askStep() {
@@ -960,19 +721,17 @@ function showResult() {
   state.sessionResults[state.project] = result;
   markDone(state.project);
   updateSidebar();
-
   const bdRows = bd.map(([label,hrs])=>
     `<div class="rc-row"><span class="rc-label">${label}</span><span class="rc-val">${fmtHrs(hrs)} hrs</span></div>`
   ).join('');
   const pmNote = result.pm ? `<div class="rc-row"><span class="rc-label">Project Management Fee (20%)</span><span class="rc-val">included</span></div>` : '';
-
   botSay(`
     <strong>✅ ${p.name} — Estimate Complete</strong>
     <div class="result-card">
       ${bdRows}
       ${pmNote}
       <div class="rc-row big"><span class="rc-label">Total Labour Hours</span><span class="rc-val">${fmtHrs(result.hrs)} hrs</span></div>
-      <div class="rc-row big"><span class="rc-label">Total Cost <span style="font-weight:400;font-size:12px">(@ €${RATE}/hr)</span></span><span class="rc-val">€${fmt(result.cost)}</span></div>
+      <div class="rc-row big"><span class="rc-label">Total Cost <span style="font-weight:400;font-size:12px">(@ €${result.rate}/hr)</span></span><span class="rc-val">€${fmt(result.cost)}</span></div>
     </div>
   `, 500).then(()=>{
     botSay(`Would you like to scope another project, or view the full session summary?`, 500).then(()=>{
@@ -1019,7 +778,7 @@ function showFullSummary() {
       ${rows}
       <div class="rc-row big"><span class="rc-label">Grand Total</span><span class="rc-val">${fmtHrs(tH)} hrs — €${fmt(tC)}</span></div>
     </div>
-    <span style="color:var(--text-muted);font-size:11px">Rate: €${RATE}/hr · PM fee applied per project where selected</span>
+    <span style="color:var(--text-muted);font-size:11px">Standard rate: €${RATE}/hr · BVOIP rate: €${RATE_BVOIP}/hr · PM fee applied per project where selected</span>
   `, 500);
 }
 
@@ -1036,6 +795,7 @@ document.getElementById('userInput').addEventListener('keydown', e=>{
     <span class="tag">📧 SMTP Secure Send</span>
     <span class="tag">📱 MDM / MAM</span>
     <span class="tag">🖱️ AVD</span>
+    <span class="tag">📞 BVOIP Phone System</span>
     <span class="tag">♻️ Recycling</span>
   `, 150);
 })();
